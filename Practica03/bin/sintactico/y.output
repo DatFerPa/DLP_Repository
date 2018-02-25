@@ -1,0 +1,360 @@
+   0  $accept : programa $end
+
+   1  programa : lista_definicion_variables FUNC MAIN '(' ')' '{' '}'
+
+   2  lista_definicion_variables : lista_definicion_variables definicion_variable
+   3                             |
+
+   4  definicion_variable : VAR variable ';'
+
+   5  variable : variable_simple
+   6           | variable_struct
+
+   7  variable_simple : identificadores tipo_variable
+
+   8  variable_struct : IDENT STRUCT '{' registros_struct '}'
+
+   9  registros_struct : registro_struct
+  10                   | registros_struct registro_struct
+
+  11  registro_struct : IDENT tipo_variable ';'
+
+  12  tipo_variable : tipo
+  13                | tipo_vector
+
+  14  tipo : INT
+  15       | FLOAT32
+  16       | CHAR
+
+  17  tipo_vector : corchetes_tam tipo
+
+  18  corchetes_tam : '[' CTE_ENTERA ']'
+  19                | corchetes_tam '[' CTE_ENTERA ']'
+
+  20  identificadores : IDENT
+  21                  | identificadores ',' IDENT
+
+state 0
+	$accept : . programa $end  (0)
+	lista_definicion_variables : .  (3)
+
+	.  reduce 3
+
+	programa  goto 1
+	lista_definicion_variables  goto 2
+
+
+state 1
+	$accept : programa . $end  (0)
+
+	$end  accept
+
+
+state 2
+	programa : lista_definicion_variables . FUNC MAIN '(' ')' '{' '}'  (1)
+	lista_definicion_variables : lista_definicion_variables . definicion_variable  (2)
+
+	VAR  shift 3
+	FUNC  shift 4
+	.  error
+
+	definicion_variable  goto 5
+
+
+state 3
+	definicion_variable : VAR . variable ';'  (4)
+
+	IDENT  shift 6
+	.  error
+
+	variable  goto 7
+	variable_simple  goto 8
+	variable_struct  goto 9
+	identificadores  goto 10
+
+
+state 4
+	programa : lista_definicion_variables FUNC . MAIN '(' ')' '{' '}'  (1)
+
+	MAIN  shift 11
+	.  error
+
+
+state 5
+	lista_definicion_variables : lista_definicion_variables definicion_variable .  (2)
+
+	.  reduce 2
+
+
+state 6
+	variable_struct : IDENT . STRUCT '{' registros_struct '}'  (8)
+	identificadores : IDENT .  (20)
+
+	STRUCT  shift 12
+	INT  reduce 20
+	FLOAT32  reduce 20
+	CHAR  reduce 20
+	'['  reduce 20
+	','  reduce 20
+
+
+state 7
+	definicion_variable : VAR variable . ';'  (4)
+
+	';'  shift 13
+	.  error
+
+
+state 8
+	variable : variable_simple .  (5)
+
+	.  reduce 5
+
+
+state 9
+	variable : variable_struct .  (6)
+
+	.  reduce 6
+
+
+state 10
+	variable_simple : identificadores . tipo_variable  (7)
+	identificadores : identificadores . ',' IDENT  (21)
+
+	INT  shift 14
+	FLOAT32  shift 15
+	CHAR  shift 16
+	'['  shift 17
+	','  shift 18
+	.  error
+
+	tipo_variable  goto 19
+	tipo  goto 20
+	tipo_vector  goto 21
+	corchetes_tam  goto 22
+
+
+state 11
+	programa : lista_definicion_variables FUNC MAIN . '(' ')' '{' '}'  (1)
+
+	'('  shift 23
+	.  error
+
+
+state 12
+	variable_struct : IDENT STRUCT . '{' registros_struct '}'  (8)
+
+	'{'  shift 24
+	.  error
+
+
+state 13
+	definicion_variable : VAR variable ';' .  (4)
+
+	.  reduce 4
+
+
+state 14
+	tipo : INT .  (14)
+
+	.  reduce 14
+
+
+state 15
+	tipo : FLOAT32 .  (15)
+
+	.  reduce 15
+
+
+state 16
+	tipo : CHAR .  (16)
+
+	.  reduce 16
+
+
+state 17
+	corchetes_tam : '[' . CTE_ENTERA ']'  (18)
+
+	CTE_ENTERA  shift 25
+	.  error
+
+
+state 18
+	identificadores : identificadores ',' . IDENT  (21)
+
+	IDENT  shift 26
+	.  error
+
+
+state 19
+	variable_simple : identificadores tipo_variable .  (7)
+
+	.  reduce 7
+
+
+state 20
+	tipo_variable : tipo .  (12)
+
+	.  reduce 12
+
+
+state 21
+	tipo_variable : tipo_vector .  (13)
+
+	.  reduce 13
+
+
+state 22
+	tipo_vector : corchetes_tam . tipo  (17)
+	corchetes_tam : corchetes_tam . '[' CTE_ENTERA ']'  (19)
+
+	INT  shift 14
+	FLOAT32  shift 15
+	CHAR  shift 16
+	'['  shift 27
+	.  error
+
+	tipo  goto 28
+
+
+state 23
+	programa : lista_definicion_variables FUNC MAIN '(' . ')' '{' '}'  (1)
+
+	')'  shift 29
+	.  error
+
+
+state 24
+	variable_struct : IDENT STRUCT '{' . registros_struct '}'  (8)
+
+	IDENT  shift 30
+	.  error
+
+	registros_struct  goto 31
+	registro_struct  goto 32
+
+
+state 25
+	corchetes_tam : '[' CTE_ENTERA . ']'  (18)
+
+	']'  shift 33
+	.  error
+
+
+state 26
+	identificadores : identificadores ',' IDENT .  (21)
+
+	.  reduce 21
+
+
+state 27
+	corchetes_tam : corchetes_tam '[' . CTE_ENTERA ']'  (19)
+
+	CTE_ENTERA  shift 34
+	.  error
+
+
+state 28
+	tipo_vector : corchetes_tam tipo .  (17)
+
+	.  reduce 17
+
+
+state 29
+	programa : lista_definicion_variables FUNC MAIN '(' ')' . '{' '}'  (1)
+
+	'{'  shift 35
+	.  error
+
+
+state 30
+	registro_struct : IDENT . tipo_variable ';'  (11)
+
+	INT  shift 14
+	FLOAT32  shift 15
+	CHAR  shift 16
+	'['  shift 17
+	.  error
+
+	tipo_variable  goto 36
+	tipo  goto 20
+	tipo_vector  goto 21
+	corchetes_tam  goto 22
+
+
+state 31
+	variable_struct : IDENT STRUCT '{' registros_struct . '}'  (8)
+	registros_struct : registros_struct . registro_struct  (10)
+
+	IDENT  shift 30
+	'}'  shift 37
+	.  error
+
+	registro_struct  goto 38
+
+
+state 32
+	registros_struct : registro_struct .  (9)
+
+	.  reduce 9
+
+
+state 33
+	corchetes_tam : '[' CTE_ENTERA ']' .  (18)
+
+	.  reduce 18
+
+
+state 34
+	corchetes_tam : corchetes_tam '[' CTE_ENTERA . ']'  (19)
+
+	']'  shift 39
+	.  error
+
+
+state 35
+	programa : lista_definicion_variables FUNC MAIN '(' ')' '{' . '}'  (1)
+
+	'}'  shift 40
+	.  error
+
+
+state 36
+	registro_struct : IDENT tipo_variable . ';'  (11)
+
+	';'  shift 41
+	.  error
+
+
+state 37
+	variable_struct : IDENT STRUCT '{' registros_struct '}' .  (8)
+
+	.  reduce 8
+
+
+state 38
+	registros_struct : registros_struct registro_struct .  (10)
+
+	.  reduce 10
+
+
+state 39
+	corchetes_tam : corchetes_tam '[' CTE_ENTERA ']' .  (19)
+
+	.  reduce 19
+
+
+state 40
+	programa : lista_definicion_variables FUNC MAIN '(' ')' '{' '}' .  (1)
+
+	.  reduce 1
+
+
+state 41
+	registro_struct : IDENT tipo_variable ';' .  (11)
+
+	.  reduce 11
+
+
+45 terminals, 14 nonterminals
+22 grammar rules, 42 states

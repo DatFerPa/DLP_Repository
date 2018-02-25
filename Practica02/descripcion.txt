@@ -1,0 +1,22 @@
+
+Elementos léxicos sensibles a mayúsculas/minúsculas.
+
+Elementos:
+
+  Comentarios con // hasta el final de línea (done)
+  Comentarios con varias líneas (de /* hasta */) (done)
+  Identificadores { letra (letra|digito)* } (done)
+  		Se permitirán tildes y eñes
+  Palabras Reservadas: read write while if else int float32  (done)
+		char var struct return func main void
+
+
+  Constantes Enteras sin signo (done)
+  Constantes Reales con punto decimal y formato exponente (done)
+	12.3, 34.12E-3, 2., 3e3, 3e-10
+  Constantes carácter entre '', pudiendo identificar 
+	el código ASCII en decimal '\126' y '\n' '\t'
+  Operadores + - / * % > < = == <= >= != ( ) [ ] && || ! .
+  Delimitadores de ámbito con llaves { } (done)
+  El delimitador de sentencias ; y de declaración de variables , (done)
+  POR CONVENIO, el final de fichero es el token 0

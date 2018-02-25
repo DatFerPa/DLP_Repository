@@ -1,0 +1,54 @@
++ - < > * % ! ( ) ; . [ ] / = { }		
+
+ñññññ	
+
+156481946		
+
+catábasis para ver el mar
+
+
+/* comentario multilinea en una linea */
+
+//comentario una linea
+/* comentario 
+multilinea 
+en mas de una linea */
+
+
+
+aáàçñÑéèíìóòúùûôâêîäëïöü
+AÁÀÂÉÈÊÍÌÎÓÒÔÚÛÙÇÄËÏÖÜ
+read 
+write
+while
+if
+else
+int
+float32
+char
+var
+struct
+return
+func
+main
+void
+
+12.3
+34.254E-4
+235e3434
+232E231
+21.
+3e3
+3e-10
+
+9-9
+
+'e' 
+'E' 
+'1' 
+'á' 
+'a' 
+ 'W' 
+ '\1234'
+'\n'
+ '\t'

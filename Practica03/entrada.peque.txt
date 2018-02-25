@@ -1,0 +1,8 @@
+var vector[32]float32;
+var vector[32][45]float32;
+var vector[32][1][2]float32;
+var pair struct {
+    integer int;
+    character char;
+  };
+func main () {}
