@@ -26,7 +26,7 @@ import java.io.Reader;
 // * Gramática y acciones Yacc
 
 
-programa: lista_definicion_variables FUNC MAIN '(' ')' '{' '}'
+programa: lista_definicion_variables lista_definicion_funciones FUNC MAIN '(' ')' '{' lista_definicion_variables lista_sentencias '}'
 		 ;
 
 lista_definicion_variables: lista_definicion_variables definicion_variable 
@@ -34,6 +34,28 @@ lista_definicion_variables: lista_definicion_variables definicion_variable
 		;
 		
 definicion_variable: VAR variable ';'		
+		;	
+		
+lista_definicion_funciones: lista_definicion_funciones definicion_funcion
+		|
+		;
+		
+definicion_funcion: FUNC IDENT '(' lista_parametros_opt ')' tipo_retorno '{' lista_definicion_variables lista_sentencias '}'
+		;
+		
+tipo_retorno: tipo
+		|
+		;
+							
+lista_parametros_opt: lista_parametros
+		|
+		;
+
+lista_parametros: lista_parametros ',' parametro
+		| parametro
+		;
+
+parametro: IDENT tipo
 		;		
 
 variable: variable_simple
@@ -65,8 +87,8 @@ tipo: INT
 tipo_vector: corchetes_tam tipo
 		;
 
-corchetes_tam: '[' CTE_ENTERA ']'
-	| corchetes_tam '[' CTE_ENTERA ']'
+corchetes_tam: '[' expresion ']'
+	| corchetes_tam '[' expresion ']'
 	;
 		
 identificadores: IDENT
@@ -74,9 +96,69 @@ identificadores: IDENT
 		;
 
 
+lista_sentencias: lista_sentencias sentencia
+		 | 
+		 ;
+
+sentencia: 	expresion '=' expresion ';'
+		| IF expresion '{' lista_sentencias '}'
+		| IF expresion '{' lista_sentencias '}' ELSE '{' lista_sentencias '}'
+		| WHILE expresion '{' lista_sentencias '}'	
+		| IDENT '(' lista_expresiones_opt ')' ';'	
+		| WRITE '(' lista_expresiones ')' ';'
+		| READ '(' lista_expresiones ')' ';'
+		| RETURN expresion ';'
+		; 	 
+	
+cast: tipo '(' expresion ')'
+	;		 
+
+lista_expresiones_opt: lista_expresiones
+		|
+		;
+
+lista_expresiones: lista_expresiones ',' expresion
+		| expresion
+		;
+
+expresion: expresion '+' expresion		
+         | expresion '*' expresion
+         | expresion '/' expresion
+         | IDENT corchetes_tam
+         | IDENT '(' lista_expresiones_opt ')'
+         | expresion '%' expresion
+         | expresion '-' expresion
+         | cast
+         | '-' expresion %prec MENOS_UNARIO
+         | '(' expresion ')'
+         | '[' expresion ']'
+         | expresion AND expresion
+         | expresion OR expresion
+         | expresion IGUAL_IGUAL expresion
+         | expresion MAYOR_IGUAL expresion
+         | expresion MENOR_IGUAL expresion
+         | expresion DISTINTO expresion
+         | expresion '>' expresion
+         | expresion '<' expresion
+         | '!' expresion
+         | expresion '.' expresion
+         | CTE_ENTERA	
+         | CTE_REAL
+         | CTE_CARACTER
+         | IDENT
+         ;
 
 
 
+
+
+
+
+ 
+ 
+ 
+ 
+ 
                  
 //sentencia_if: IF expresion '{' lista_sentencia '}'
 //al ser parentesis opcionales, no hace falta definir una con parentesis, ya que se saca de la anterior (expresion)

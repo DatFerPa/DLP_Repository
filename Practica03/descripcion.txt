@@ -51,7 +51,7 @@ Se permite la sentencia 'return' <expresion> (la expresion es obligatoria). (don
 
 La invocación a una función será una nueva expresión cuando retorne un valor. (no entiendo)
 
-Un procedimiento (función sin tipo de retorno) será siempre sentencia.
+Un procedimiento (función sin tipo de retorno) será siempre sentencia. (tengo dudas en esto)
 
 La conversión explícita a tipos simples (cast) se realizará utilizando la sintaxis (done)
  del lenguaje Go: tipo '(' expresión ')'

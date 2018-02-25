@@ -1,0 +1,11 @@
+/JFlex.jar
+/ast/
+/compile.cmd
+/compileIntrospector.cmd
+/lexico/
+/sintactico/
+/test/
+/IntrospectorDemo.class
+/Main.class
+/Nodo.class
+/NodoRaiz.class
