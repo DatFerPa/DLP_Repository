@@ -1,0 +1,13 @@
+var pair struct {
+    integer int;
+    character char;
+  };
+var real,pop,sdas float32;
+var matrix [10] int;
+var matrix [10][10]int;
+var real float32;
+
+func main() {
+	real = 4.5 + 4. * 3e+3 - 5.4E-3;
+	a[10] = a[15+6][3*3];
+}

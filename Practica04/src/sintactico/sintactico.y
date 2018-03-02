@@ -40,6 +40,35 @@ lista_definicion_variables: lista_definicion_variables definicion_variable
 definicion_variable: VAR variable ';'		
 		;	
 		
+variable: variable_simple
+		| variable_struct	
+		;	
+		
+variable_simple: identificadores tipo_variable
+		;
+
+variable_struct: IDENT STRUCT '{' registros_struct '}'
+		;
+
+registros_struct: registros_struct variable_simple ';'
+		| 
+		;		
+
+tipo_variable: tipo
+		| tipo_vector
+		;
+
+tipo: INT
+	| FLOAT32
+	| CHAR
+	;
+	
+tipo_vector: '[' CTE_ENTERA ']' tipo_variable
+		;
+
+identificadores: IDENT
+		| identificadores ',' IDENT
+		;			
 		
 definicion_funcion: FUNC IDENT '(' lista_parametros_opt ')' tipo_retorno '{' lista_definicion_variables lista_sentencias '}'
 		;
@@ -58,40 +87,6 @@ lista_parametros: lista_parametros ',' parametro
 
 parametro: IDENT tipo
 		;		
-
-variable: variable_simple
-		| variable_struct	
-		;
-
-variable_simple: identificadores tipo_variable
-		;
-
-variable_struct: IDENT STRUCT '{' registros_struct '}'
-		;
-
-registros_struct: registros_struct registro_struct
-		| 
-		;
-		
-registro_struct: IDENT tipo_variable ';'
-		;		
-
-tipo_variable: tipo
-		| tipo_vector
-		;
-
-tipo: INT
-	| FLOAT32
-	| CHAR
-	;
-	
-tipo_vector: '[' CTE_ENTERA ']' tipo
-		;
-
-identificadores: IDENT
-		| identificadores ',' IDENT
-		;
-
 
 lista_sentencias: lista_sentencias sentencia
 		 | 

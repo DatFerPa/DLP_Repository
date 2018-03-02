@@ -68,7 +68,6 @@ struct {this.yylval = yytext(); return Parser.STRUCT;}
 return {this.yylval = yytext(); return Parser.RETURN;}
 func {this.yylval = yytext(); return Parser.FUNC;}
 main {this.yylval = yytext(); return Parser.MAIN;}
-void {this.yylval = yytext(); return Parser.VOID;}
 
 
 
@@ -89,8 +88,8 @@ void {this.yylval = yytext(); return Parser.VOID;}
 
 
 //Comentarios
-"/*"~"*/" {System.out.println ("Comentario multilinea: "+yytext());}
-"//".* {System.out.println ("Comentario una linea: "+yytext());}
+"/*"~"*/" {}
+"//".* {}
 
 //operadores logicos
 "=="	{this.yylval = yytext();return Parser.IGUAL_IGUAL;}

@@ -2,6 +2,7 @@
 var i, j, n int;
 var c char;
 var z float32;
+var real float32;
 
 // * Función vacia
 func p() {}
@@ -51,6 +52,7 @@ func main() {
     }
     i=i+1;
   }
+  real = 4.5 + 4. * 3e+3 - 5.4E-3;
   write(f(i, float32(i))); // * Invocacion como expresion
   vector[9][int(4.3)]=5.6;
   f(1, 2.2); // * Invocation como sentencia

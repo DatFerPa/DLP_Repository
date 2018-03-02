@@ -1,8 +1,1 @@
-var vector[32]float32;
-var vector[32][45]float32;
-var vector[32][1][2]float32;
-var pair struct {
-    integer int;
-    character char;
-  };
-func main () {}
+real = 4.5 + 4. * 3e+3 - 5.4E-3;

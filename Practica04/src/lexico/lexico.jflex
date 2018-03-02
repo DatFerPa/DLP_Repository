@@ -43,7 +43,7 @@ public void error(String texto){
 // ************  Patrones (macros) ********************
 ConstanteEntera = [0-9]*
 Identificador = [a-zA-Zёбр-ќР-м][a-zA-Z0-9ёбр-ќР-м]*
-ConstanteReal = [0-9]+(\.[0-9]*)?((e|E)-?[0-9]+)?
+ConstanteReal = [0-9]+(\.[0-9]*)?((e|E)[-+]?[0-9]+)?
 ConstanteCaracter = "'"(.|(\\[0-9]+)|(\\[nt]))"'"
 
 //[0-9a-zA-Zёбр-ќР-м]
@@ -70,14 +70,17 @@ func {this.yylval = yytext(); return Parser.FUNC;}
 main {this.yylval = yytext(); return Parser.MAIN;}
 
 
-
 //constante entera
 {ConstanteEntera}	{ this.yylval = new Integer(yytext());
          			  return Parser.CTE_ENTERA;  }
- 
- //constante real
+
+//constante real
 {ConstanteReal} {this.yylval = yytext();
 					return Parser.CTE_REAL;}
+
+
+ 
+
  //Identificador        			  
 {Identificador}	{this.yylval = yytext();
 					return Parser.IDENT;}
