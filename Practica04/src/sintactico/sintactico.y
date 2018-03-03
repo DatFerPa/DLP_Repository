@@ -4,6 +4,12 @@
 // * El package lo añade yacc si utilizamos la opción -Jpackage
 import lexico.Lexico;
 import java.io.Reader;
+import java.util.*;
+import ast.definiciones.*;
+import ast.expresiones.*;
+import ast.sentencias.*;
+import ast.tipos.*;
+import ast.*;
 %}
 
 // * Declaraciones Yacc
@@ -27,129 +33,135 @@ import java.io.Reader;
 
 
 programa: lista_definiciones FUNC MAIN '(' ')' '{' lista_definicion_variables lista_sentencias '}'
+		 {
+			this.ast = new Programa(lexico.getLinea(),lexico.getColumna(),(List<Definicion>)$1,(List<DefVariable>)$7,(List<Sentencia>)$8);
+		 }
 		 ;
 
-lista_definiciones: lista_definiciones definicion_variable
-		| lista_definiciones definicion_funcion
-		|
-		;
-lista_definicion_variables: lista_definicion_variables definicion_variable
-		|
+lista_definiciones: lista_definiciones definicion_variable  {$$ = (List)$1; for(Definicion def:(List<Definicion>)$2){((List)$1).add(def);}}
+		| lista_definiciones definicion_funcion 			{$$ = (List)$1; ((List)$$).add($2);}
+		| 													{$$ = new ArrayList<Definicion>();}
 		;
 		
-definicion_variable: VAR variable ';'		
-		;	
 		
-variable: variable_simple
-		| variable_struct	
-		;	
+lista_definicion_variables: lista_definicion_variables definicion_variable {$$ = $1; for(Definicion def:(List<Definicion>)$2){((List)$1).add(def);}}	
+		|																   {$$ = new ArrayList<Definicion>();}
+		;
 		
-variable_simple: identificadores tipo_variable
+definicion_variable: VAR variable ';'		{ $$ = $2;}
+		;
+				
+variable: identificadores tipo_ampliado 
+		{
+			$$ = new ArrayList();
+			for(String nombre: (List<String>)$1){
+				((List)$$).add(new DefVariable(nombre,$2));
+			}
+		}
+		;
+							
+tipo_ampliado: tipo 	{$$ = $1;}
+		| tipo_vector 	{$$ = $1;}
+		| tipo_struct	{$$ = $1;}	
 		;
 
-variable_struct: IDENT STRUCT '{' registros_struct '}'
-		;
-
-registros_struct: registros_struct variable_simple ';'
-		| 
-		;		
-
-tipo_variable: tipo
-		| tipo_vector
-		;
-
-tipo: INT
-	| FLOAT32
-	| CHAR
+tipo: INT			{$$ = TipoEntero.getInstancia();}	
+	| FLOAT32		{$$ = TipoReal.getInstancia();} 	
+	| CHAR 			{$$ = TipoCaracter.getInstancia();}
 	;
 	
-tipo_vector: '[' CTE_ENTERA ']' tipo_variable
+tipo_vector: '[' CTE_ENTERA ']' tipo_ampliado	{$$ = new TipoArray((int)$2,(Tipo)$4);} 
+		;
+		
+tipo_struct: STRUCT '{' registros_struct '}'	{$$ = new TipoStruct((List<Campo>)$3);}	
 		;
 
-identificadores: IDENT
-		| identificadores ',' IDENT
+registros_struct: registros_struct identificadores tipo ';'		{$$ = $1; for(String nombre: (List<String>)$2){((List)$$).add(new Campo(nombre,$3));}}		
+		| 														{$$ = new ArrayList();}	
+		;
+		
+//campo_struct: IDENT						{$$ = new ArrayList(); ((List)$$).add($1);}
+//		| identificadores ',' IDENT		{$$ = $1; ((List)$$).add($3);}
+//		;
+
+identificadores: IDENT					{$$ = new ArrayList(); ((List)$$).add($1);}
+		| identificadores ',' IDENT		{$$ = $1; ((List)$$).add($3);}
 		;			
 		
 definicion_funcion: FUNC IDENT '(' lista_parametros_opt ')' tipo_retorno '{' lista_definicion_variables lista_sentencias '}'
+		{
+			$$ = new DefFuncion(lexico.getLinea(),lexico.getColumna(),$2,new TipoFuncion($6,$4),$8,$9);
+		}
 		;
 		
-tipo_retorno: tipo
-		|
+tipo_retorno: tipo  {$$ = $1}
+		|			{$$ = TipoVoid.getInstancia();}
 		;
 							
-lista_parametros_opt: lista_parametros
-		|
+lista_parametros_opt: lista_parametros {$$ = $1;}
+		|							   {$$ = new ArrayList();}
 		;
 
-lista_parametros: lista_parametros ',' parametro
-		| parametro
+lista_parametros: lista_parametros ',' parametro	{$$ = $1; ((List)$$).add($3);}
+		| parametro									{$$ = new ArrayList(); ((List)$$).add($1);}
 		;
 
-parametro: IDENT tipo
+parametro: IDENT tipo		{$$ = new DefVariable($1,$2);}
 		;		
 
-lista_sentencias: lista_sentencias sentencia
-		 | 
+lista_sentencias: lista_sentencias sentencia	{$$ = $1; ((List)$$).add($2);}
+		 | 										{$$ = new ArrayList<Sentencia>();}
 		 ;
 
-sentencia: 	expresion '=' expresion ';'
-		| IF expresion '{' lista_sentencias '}'
-		| IF expresion '{' lista_sentencias '}' ELSE '{' lista_sentencias '}'
-		| WHILE expresion '{' lista_sentencias '}'	
-		| IDENT '(' lista_expresiones_opt ')' ';'	
-		| WRITE '(' lista_expresiones ')' ';'
-		| READ '(' lista_expresiones ')' ';'
-		| RETURN expresion ';'
+sentencia: 	expresion '=' expresion ';'											{$$ = new Asignacion($1,$3);}
+		| IF expresion '{' lista_sentencias '}'									{$$ = new SentenciaIf($2,$4, new ArrayList<Sentencia>());}
+		| IF expresion '{' lista_sentencias '}' ELSE '{' lista_sentencias '}'	{$$ = new SentenciaIf($2,$4,$8);}
+		| WHILE expresion '{' lista_sentencias '}'								{$$ = new SentenciaWhile($2,$4);}	
+		| IDENT '(' lista_expresiones_opt ')' ';'								{$$ = new SentenciaFuncion($1,$3);}	
+		| WRITE '(' expresion ')' ';'											{$$ = new Escritura($3);}
+		| READ '(' expresion ')' ';'											{$$ = new Lectura($3);}
+		| RETURN expresion ';'													{$$ = new SentenciaReturn($2);}
 		; 	 
 	
-cast: tipo '(' expresion ')'
+cast: tipo '(' expresion ')'		{$$ = new ExpresionCast($1,$3);}
 	;		 
 
-lista_expresiones_opt: lista_expresiones
-		|
+lista_expresiones_opt: lista_expresiones		{$$ = $1;}
+		|										{$$ = new ArrayList<Expresion>();}
 		;
 
-lista_expresiones: lista_expresiones ',' expresion
-		| expresion
+lista_expresiones: lista_expresiones ',' expresion		{$$ = $1; ((List)$$).add($3);}
+		| expresion										{$$ = new ArrayList(); ((List)$$).add($1);}
 		;
 
-expresion: expresion '+' expresion		
-         | expresion '*' expresion
-         | expresion '/' expresion        
-         | IDENT '(' lista_expresiones_opt ')'
-         | expresion '%' expresion
-         | expresion '-' expresion
-         | cast
-         | '-' expresion %prec MENOS_UNARIO
-         | '(' expresion ')'
-         | expresion '[' expresion ']'
-         | expresion AND expresion
-         | expresion OR expresion
-         | expresion IGUAL_IGUAL expresion
-         | expresion MAYOR_IGUAL expresion
-         | expresion MENOR_IGUAL expresion
-         | expresion DISTINTO expresion
-         | expresion '>' expresion
-         | expresion '<' expresion
-         | '!' expresion
-         | expresion '.' expresion
-         | CTE_ENTERA	
-         | CTE_REAL
-         | CTE_CARACTER
-         | IDENT
+expresion: expresion '+' expresion					{$$ = new ExpresionAritmetica($1,$2,$3);}
+         | expresion '*' expresion					{$$ = new ExpresionAritmetica($1,$2,$3);}
+         | expresion '/' expresion        			{$$ = new ExpresionAritmetica($1,$2,$3);}
+         | IDENT '(' lista_expresiones_opt ')'		{$$ = new ExpresionFuncion($1,$3);}
+         | expresion '%' expresion					{$$ = new ExpresionAritmetica($1,$2,$3);}
+         | expresion '-' expresion					{$$ = new ExpresionAritmetica($1,$2,$3);}
+         | cast										{$$ = $1;}
+         | '-' expresion %prec MENOS_UNARIO			{$$ = new MenosUnario($2);}
+         | '(' expresion ')'						{$$ = $1;}	
+         | expresion '[' expresion ']'				{$$ = new AccesoArray($1,$3);}
+         | expresion AND expresion					{$$ = new ExpresionLogica($1,$2,$3);}
+         | expresion OR expresion					{$$ = new ExpresionLogica($1,$2,$3);}
+         | expresion IGUAL_IGUAL expresion			{$$ = new Comparacion($1,$2,$3);}
+         | expresion MAYOR_IGUAL expresion			{$$ = new Comparacion($1,$2,$3);}
+         | expresion MENOR_IGUAL expresion			{$$ = new Comparacion($1,$2,$3);}
+         | expresion DISTINTO expresion				{$$ = new Comparacion($1,$2,$3);}
+         | expresion '>' expresion					{$$ = new Comparacion($1,$2,$3);}
+         | expresion '<' expresion					{$$ = new Comparacion($1,$2,$3);}
+         | '!' expresion							{$$ = new Negacion($2);}
+         | expresion '.' expresion					{$$ = new AccesoACampo($1,$3);}
+         | CTE_ENTERA								{$$ = new CTE_Entera($1);}
+         | CTE_REAL									{$$ = new CTE_Real($1);}
+         | CTE_CARACTER								{$$ = new CTE_Caracter($1);}
+         | IDENT									{$$ = new Variable($1);}
          ;
 
 
 
-
-
-
-
- 
- 
- 
- 
- 
                  
 //sentencia_if: IF expresion '{' lista_sentencia '}'
 //al ser parentesis opcionales, no hace falta definir una con parentesis, ya que se saca de la anterior (expresion)
@@ -194,3 +206,6 @@ public void yyerror (String error) {
 public Parser(Lexico lexico) {
 	this.lexico = lexico;
 }
+
+private NodoAST ast;
+public NodoAST getAST() { return ast; }

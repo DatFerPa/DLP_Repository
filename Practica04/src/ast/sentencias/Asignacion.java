@@ -1,4 +1,9 @@
-package ast;
+package ast.sentencias;
+
+import ast.Expresion;
+import ast.NodoASTAbstract;
+import ast.Sentencia;
+import ast.expresiones.Variable;
 
 public class Asignacion extends NodoASTAbstract implements Sentencia {
 

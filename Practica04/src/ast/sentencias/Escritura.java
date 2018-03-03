@@ -1,4 +1,8 @@
-package ast;
+package ast.sentencias;
+
+import ast.Expresion;
+import ast.NodoASTAbstract;
+import ast.Sentencia;
 
 public class Escritura extends NodoASTAbstract implements Sentencia{
 	private Expresion expresion;

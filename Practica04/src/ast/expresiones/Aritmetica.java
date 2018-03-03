@@ -1,4 +1,7 @@
-package ast;
+package ast.expresiones;
+
+import ast.Expresion;
+import ast.NodoASTAbstract;
 
 public class Aritmetica extends NodoASTAbstract implements Expresion {
 

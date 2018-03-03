@@ -1,4 +1,7 @@
-package ast;
+package ast.expresiones;
+
+import ast.Expresion;
+import ast.NodoASTAbstract;
 
 public class Variable extends NodoASTAbstract implements Expresion {
 	private String nombre;
