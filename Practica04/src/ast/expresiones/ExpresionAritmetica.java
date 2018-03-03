@@ -3,13 +3,13 @@ package ast.expresiones;
 import ast.Expresion;
 import ast.NodoASTAbstract;
 
-public class Aritmetica extends NodoASTAbstract implements Expresion {
+public class ExpresionAritmetica extends NodoASTAbstract implements Expresion {
 
 	private String operador;
 	private Expresion operando1;
 	private Expresion operando2;
 
-	public Aritmetica(int linea, int columna, Expresion operando1, String operador, Expresion operando2) {
+	public ExpresionAritmetica(int linea, int columna, Expresion operando1, String operador, Expresion operando2) {
 		setLinea(linea);
 		setColumna(columna);
 		this.operador = operador;

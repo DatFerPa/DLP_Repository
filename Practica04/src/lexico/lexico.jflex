@@ -71,7 +71,7 @@ main {this.yylval = yytext(); return Parser.MAIN;}
 
 
 //constante entera
-{ConstanteEntera}	{ this.yylval = new Integer(yytext());
+{ConstanteEntera}	{ this.yylval = yytext();
          			  return Parser.CTE_ENTERA;  }
 
 //constante real

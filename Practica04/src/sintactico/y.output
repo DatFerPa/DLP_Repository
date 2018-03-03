@@ -83,7 +83,7 @@
   60            | expresion '>' expresion
   61            | expresion '<' expresion
   62            | '!' expresion
-  63            | expresion '.' expresion
+  63            | expresion '.' IDENT
   64            | CTE_ENTERA
   65            | CTE_REAL
   66            | CTE_CARACTER
@@ -746,7 +746,7 @@ state 66
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	IGUAL_IGUAL  shift 80
 	MAYOR_IGUAL  shift 81
@@ -884,7 +884,7 @@ state 72
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	IGUAL_IGUAL  shift 80
 	MAYOR_IGUAL  shift 81
@@ -922,7 +922,7 @@ state 73
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	IGUAL_IGUAL  shift 80
 	MAYOR_IGUAL  shift 81
@@ -959,7 +959,7 @@ state 74
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	IGUAL_IGUAL  shift 80
 	MAYOR_IGUAL  shift 81
@@ -1020,7 +1020,7 @@ state 76
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	'['  shift 94
 	'.'  shift 95
@@ -1061,7 +1061,7 @@ state 77
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
 	expresion : '!' expresion .  (62)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	'['  shift 94
 	'.'  shift 95
@@ -1102,7 +1102,7 @@ state 78
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	IGUAL_IGUAL  shift 80
 	MAYOR_IGUAL  shift 81
@@ -1444,23 +1444,10 @@ state 94
 
 
 state 95
-	expresion : expresion '.' . expresion  (63)
+	expresion : expresion '.' . IDENT  (63)
 
-	INT  shift 13
-	FLOAT32  shift 14
-	CHAR  shift 15
-	IDENT  shift 71
-	CTE_ENTERA  shift 57
-	CTE_REAL  shift 58
-	CTE_CARACTER  shift 59
-	'-'  shift 60
-	'!'  shift 61
-	'('  shift 62
+	IDENT  shift 123
 	.  error
-
-	tipo  goto 64
-	expresion  goto 123
-	cast  goto 67
 
 
 state 96
@@ -1507,7 +1494,7 @@ state 97
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	IGUAL_IGUAL  shift 80
 	MAYOR_IGUAL  shift 81
@@ -1544,7 +1531,7 @@ state 98
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	IGUAL_IGUAL  shift 80
 	MAYOR_IGUAL  shift 81
@@ -1629,7 +1616,7 @@ state 103
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	IGUAL_IGUAL  shift 80
 	MAYOR_IGUAL  shift 81
@@ -1688,7 +1675,7 @@ state 107
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	IGUAL_IGUAL  shift 80
 	MAYOR_IGUAL  shift 81
@@ -1725,7 +1712,7 @@ state 108
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	'+'  shift 89
 	'-'  shift 90
@@ -1766,7 +1753,7 @@ state 109
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	'+'  shift 89
 	'-'  shift 90
@@ -1807,7 +1794,7 @@ state 110
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	'+'  shift 89
 	'-'  shift 90
@@ -1848,7 +1835,7 @@ state 111
 	expresion : expresion DISTINTO expresion .  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	'+'  shift 89
 	'-'  shift 90
@@ -1889,7 +1876,7 @@ state 112
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	IGUAL_IGUAL  shift 80
 	MAYOR_IGUAL  shift 81
@@ -1926,7 +1913,7 @@ state 113
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	IGUAL_IGUAL  shift 80
 	MAYOR_IGUAL  shift 81
@@ -1967,7 +1954,7 @@ state 114
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	IGUAL_IGUAL  shift 80
 	MAYOR_IGUAL  shift 81
@@ -2008,7 +1995,7 @@ state 115
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion '>' expresion .  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	'+'  shift 89
 	'-'  shift 90
@@ -2049,7 +2036,7 @@ state 116
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
 	expresion : expresion '<' expresion .  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	'+'  shift 89
 	'-'  shift 90
@@ -2090,7 +2077,7 @@ state 117
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	'*'  shift 91
 	'/'  shift 92
@@ -2131,7 +2118,7 @@ state 118
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	'*'  shift 91
 	'/'  shift 92
@@ -2172,7 +2159,7 @@ state 119
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	'['  shift 94
 	'.'  shift 95
@@ -2213,7 +2200,7 @@ state 120
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	'['  shift 94
 	'.'  shift 95
@@ -2254,7 +2241,7 @@ state 121
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	'['  shift 94
 	'.'  shift 95
@@ -2295,7 +2282,7 @@ state 122
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	IGUAL_IGUAL  shift 80
 	MAYOR_IGUAL  shift 81
@@ -2317,22 +2304,7 @@ state 122
 
 
 state 123
-	expresion : expresion . '+' expresion  (44)
-	expresion : expresion . '*' expresion  (45)
-	expresion : expresion . '/' expresion  (46)
-	expresion : expresion . '%' expresion  (48)
-	expresion : expresion . '-' expresion  (49)
-	expresion : expresion . '[' expresion ']'  (53)
-	expresion : expresion . AND expresion  (54)
-	expresion : expresion . OR expresion  (55)
-	expresion : expresion . IGUAL_IGUAL expresion  (56)
-	expresion : expresion . MAYOR_IGUAL expresion  (57)
-	expresion : expresion . MENOR_IGUAL expresion  (58)
-	expresion : expresion . DISTINTO expresion  (59)
-	expresion : expresion . '>' expresion  (60)
-	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
-	expresion : expresion '.' expresion .  (63)
+	expresion : expresion '.' IDENT .  (63)
 
 	.  reduce 63
 
@@ -2551,7 +2523,7 @@ state 141
 	expresion : expresion . DISTINTO expresion  (59)
 	expresion : expresion . '>' expresion  (60)
 	expresion : expresion . '<' expresion  (61)
-	expresion : expresion . '.' expresion  (63)
+	expresion : expresion . '.' IDENT  (63)
 
 	IGUAL_IGUAL  shift 80
 	MAYOR_IGUAL  shift 81

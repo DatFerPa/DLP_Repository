@@ -3,9 +3,9 @@ package ast.expresiones;
 import ast.Expresion;
 import ast.NodoASTAbstract;
 
-public class LiteralEntero extends NodoASTAbstract implements Expresion {
-	private int valor;
-	public LiteralEntero (int linea, int columna, int valor) {
+public class CTE_Entera extends NodoASTAbstract implements Expresion {
+	private String valor;
+	public CTE_Entera (int linea, int columna, String valor) {
 		setLinea(linea);
 		setColumna(columna);
 		this.valor = valor;

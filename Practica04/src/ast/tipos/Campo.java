@@ -9,7 +9,7 @@ public class Campo extends NodoASTAbstract {
 	private List<Tipo> tipos;
 	private String nombre;
 		
-	public Campo(List<Tipo> tipos, String nombre) {
+	public Campo( String nombre,List<Tipo> tipos) {
 		super();
 		this.tipos = tipos;
 		this.nombre = nombre;

@@ -1,3 +1,4 @@
+
 // * Definicion de variables y funciones
 var i, j, n int;
 var c char;
