@@ -6,20 +6,26 @@ import ast.NodoASTAbstract;
 
 public class Campo extends NodoASTAbstract {
 	
-	private List<Tipo> tipos;
+	private Tipo tipo;
 	private String nombre;
 		
-	public Campo( String nombre,List<Tipo> tipos) {
+	public Campo( String nombre,Tipo tipo) {
 		super();
-		this.tipos = tipos;
+		this.tipo = tipo;
 		this.nombre = nombre;
 	}
 	
-	public List<Tipo> getTipos() {
-		return tipos;
+	public Campo( Object nombre,Object tipo) {
+		super();
+		this.tipo = (Tipo)tipo;
+		this.nombre = (String)nombre;
 	}
-	public void setTipos(List<Tipo> tipos) {
-		this.tipos = tipos;
+	
+	public Tipo getTipo() {
+		return tipo;
+	}
+	public void setTipos(Tipo tipo) {
+		this.tipo = tipo;
 	}
 	public String getNombre() {
 		return nombre;
@@ -30,7 +36,7 @@ public class Campo extends NodoASTAbstract {
 
 	@Override
 	public String toString() {
-		return "Campo [tipos=" + tipos + ", nombre=" + nombre + "]";
+		return "Campo [tipo=" + tipo + ", nombre=" + nombre + "]";
 	}
 	
 	

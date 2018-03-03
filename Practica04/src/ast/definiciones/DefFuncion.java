@@ -17,6 +17,14 @@ public class DefFuncion extends DefinicionAbstracta{
 		setLinea(linea);
 		setColumna(columna);
 	}
+	
+	public DefFuncion(int linea, int columna,Object nombre, Object tipoBase,Object variablesLocales,Object lista_sentencias) {
+		super((String)nombre, (TipoFuncion)tipoBase);
+		this.lista_sentencias = (List<Sentencia>)lista_sentencias;
+		this.variablesLocales = (List<DefVariable>) variablesLocales;	
+		setLinea(linea);
+		setColumna(columna);
+	}
 
 	public List<Sentencia> getLista_sentencias() {
 		return lista_sentencias;

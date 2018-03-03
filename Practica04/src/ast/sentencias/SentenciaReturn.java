@@ -13,10 +13,20 @@ public class SentenciaReturn extends NodoASTAbstract implements Sentencia {
 		setColumna(columna);
 		this.exp = exp;
 	}
+	
+	public SentenciaReturn(int linea, int columna,Object exp) {
+		super();
+		setLinea(linea);
+		setColumna(columna);
+		this.exp = (Expresion)exp;
+	}
+	
 	@Override
 	public String toString() {
-		return "SentenciaReturn [expresion=" + this.exp +"]";
+		return "SentenciaReturn [exp=" + exp + ", getLinea()=" + getLinea() + ", getColumna()=" + getColumna() + "]";
 	}
+	
+	
 	
 	
 	

@@ -13,6 +13,12 @@ public class Lectura extends NodoASTAbstract implements Sentencia {
 		setLinea(linea);
 		this.expresion = expresion;
 	}
+	
+	public Lectura(int linea, int columna, Object expresion) {
+		setColumna(columna);
+		setLinea(linea);
+		this.expresion = (Expresion)expresion;
+	}
 
 	@Override
 	public String toString() {

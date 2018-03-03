@@ -17,10 +17,20 @@ public class SentenciaWhile extends NodoASTAbstract implements Sentencia {
 		this.condicion = condicion;
 		this.cuerpo = cuerpo;
 	}
+	
+	public SentenciaWhile(int linea, int columna, Object condicion, Object cuerpo) {
+		setLinea(linea);
+		setColumna(columna);
+		this.condicion = (Expresion)condicion;
+		this.cuerpo = (List<Sentencia>)cuerpo;
+	}
 
 	@Override
 	public String toString() {
-		return "SentenciaWhile [condicion=" + condicion + ", cuerpo=" + cuerpo + "]";
+		return "SentenciaWhile [condicion=" + condicion + ", cuerpo=" + cuerpo + ", getLinea()=" + getLinea()
+				+ ", getColumna()=" + getColumna() + "]";
 	}
+
+	
 
 }

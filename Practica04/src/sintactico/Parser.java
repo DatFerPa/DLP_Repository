@@ -224,42 +224,42 @@ final static short yydgoto[] = {                          1,
   105,
 };
 final static short yysindex[] = {                         0,
-    0, -227, -257, -261,    0,    0,    0,  -41,  189,  -10,
-   -9,    0,    0,    0,    0, -103, -236, -225,    0,    0,
-    0,    0,    5, -219,    0,  -35,    0,  -71, -202,   23,
-   21,    0, -124,  -85,    0,    0, -202, -219,    0,  -42,
-    0, -199,    0,  -56,    0,   10,  -33,    0,    0,    0,
-   32,   33,  102,  102,  102,   34,    0,    0,    0,  102,
-  102,  102,    0,   36,    0,  477,    0, -199,  102,  102,
-   37,  444,  499,  510,  102,  -43,  -43,  540,  102,  102,
+    0, -227, -262, -239,    0,    0,    0,  -46,  189,  -22,
+   -1,    0,    0,    0,    0, -103, -229, -210,    0,    0,
+    0,    0,   17, -209,    0,  -29,    0,  -61, -212,   24,
+   22,    0, -124,  -85,    0,    0, -212, -209,    0,  189,
+    0, -198,    0,  -54,    0,   13,  -33,    0,    0,    0,
+   33,   34,  102,  102,  102,   36,    0,    0,    0,  102,
+  102,  102,    0,   37,    0,  477,    0, -198,  102,  102,
+   38,  444,  499,  510,  102,  -44,  -44,  540,  102,  102,
   102,  102,  102,  102,  102,  102,  102,  102,  102,  102,
-  102,  102,  102,  102, -192,  -12,  551,  621,  102,    0,
-    0,    0,  842,   38,   39,    0,  699,  -20,  -20,  -20,
-  -20,  789, 1142, 1142,  -20,  -20,  -32,  -32,  -43,  -43,
-  -43,  810,    0,    0,   22,   26,   41,    9,   30,   28,
-  102,    0,    0,    0,    0,    0,    0,    0, -181,    0,
+  102,  102,  102,  102, -191,  -12,  551,  621,  102,    0,
+    0,    0,  842,   39,   41,    0,  699,  -20,  -20,  -20,
+  -20,  789, 1142, 1142,  -20,  -20,  -32,  -32,  -44,  -44,
+  -44,  810,    0,    0,   23,   28,   40,    9,   30,   29,
+  102,    0,    0,    0,    0,    0,    0,    0, -178,    0,
   842,  -30,    0,   51,    0,
 };
 final static short yyrindex[] = {                         0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,   47,    0,    0,    0,    0,    0,    0,
-   49,    0,    0,    0,    0,    0,  -29,    0,    0,    0,
+    0,    0,    0,   49,    0,    0,    0,    0,    0,    0,
+   53,    0,    0,    0,    0,    0,  -28,    0,    0,    0,
     0,   72,    0,    0,    0,    0,    0,    0,    0,    0,
     0,    0,    0,    0,    0,  755,    0,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,   72,    0,    0,
-  126,    0,    0,    0,   54,  347,  373,    0,    0,    0,
+  126,    0,    0,    0,   56,  347,  373,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,    0,    0,   54,    0,
-    0,    0,    6,    0,   56,    0,    0,  886,  899,  921,
+    0,    0,    0,    0,    0,    0,    0,    0,   56,    0,
+    0,    0,    4,    0,   58,    0,    0,  886,  899,  921,
   956,    0,  -25,   -4,  979, 1046,  864,  875,  382,  417,
   456,    0,    0,    0,    0,    0,    0,    0,    0,  821,
     0,    0,    0,    0,    0,    0,    0,    0,   93,    0,
    12,    0,    0,    0,    0,
 };
 final static short yygindex[] = {                         0,
-    0,   50,  -57,   98,    0,    0,   68,   69,   -5,    0,
-    0,    0,    0,    0,    0,   64,    0, 1185,    7,    0,
+    0,   52,  -57,   98,    0,    0,   69,  -31,   -5,    0,
+    0,    0,    0,    0,    0,   65,    0, 1185,    5,    0,
     0,
 };
 final static int YYTABLESIZE=1416;
@@ -267,17 +267,17 @@ static short yytable[];
 static { yytable();}
 static void yytable(){
 yytable = new short[]{                         61,
-   39,   18,   95,   20,   93,   17,   62,   10,   11,   91,
-   96,   60,    7,   95,   92,   54,   93,   12,   54,   25,
-   61,   91,   89,   36,   90,   95,   92,   62,   20,   23,
-   24,   43,   60,   54,   46,   54,   55,    3,   26,   55,
-    4,   61,  128,  129,   27,   28,   43,   94,   62,   43,
-   29,   35,   42,   60,   55,   42,   55,   34,   94,   13,
-   14,   15,   61,   37,   38,    3,   49,   54,   50,   62,
-   94,   69,   70,   75,   60,   79,   99,  123,  130,  142,
-  135,  137,  131,   61,  136,  144,  140,   25,   55,   24,
-   62,   63,  143,   23,   41,   60,   40,   54,   68,    5,
-   40,   45,   41,    0,   30,  127,    0,    0,    0,    0,
+   39,   95,   41,   20,   93,   17,   62,    7,   46,   91,
+   96,   60,   12,   95,   92,   54,   93,   23,   54,   25,
+   61,   91,   89,   36,   90,   95,   92,   62,   20,   10,
+   11,   43,   60,   54,   20,   54,   55,    3,   24,   55,
+    4,   61,  128,  129,   43,   26,   94,   43,   62,   13,
+   14,   15,   42,   60,   55,   42,   55,   28,   94,   27,
+   29,   35,   61,   34,   37,   38,    3,   54,   49,   62,
+   94,   50,   69,   70,   60,   75,   79,   99,  123,  130,
+  137,  135,  142,   61,  131,  144,  136,  140,   55,   25,
+   62,   63,  143,   24,   23,   60,   41,   54,   40,    5,
+   68,   40,   45,  127,   30,    0,    0,    0,    0,    0,
     0,   30,  124,    0,    0,    0,   30,    0,   55,    0,
     0,    0,    0,    0,    0,   32,    0,    0,    0,    0,
     0,    0,   32,  138,   61,    0,    0,   32,    0,    0,
@@ -288,8 +288,8 @@ yytable = new short[]{                         61,
    16,    0,    0,    0,   67,   67,   67,   67,    0,    0,
     0,    0,    0,    0,    0,    0,   30,    0,    0,    0,
     0,    0,    0,    0,    0,    0,    0,    0,    0,    0,
-    0,    0,    0,    0,    0,    0,   67,   32,   67,   13,
-   14,   15,    0,   51,   52,   53,   54,    0,   13,   14,
+    0,    0,    0,    0,    0,    0,   67,   32,   67,    0,
+    0,    0,    0,   51,   52,   53,   54,    0,   13,   14,
    15,    0,   18,   55,    0,    0,   56,    0,    0,    0,
     0,   57,   58,   59,   51,   52,   53,   54,   67,   13,
    14,   15,   54,   54,   55,    0,    0,   56,    0,    0,
@@ -415,17 +415,17 @@ static short yycheck[];
 static { yycheck(); }
 static void yycheck() {
 yycheck = new short[] {                         33,
-  125,   44,   46,    9,   37,   91,   40,  269,  270,   42,
-   68,   45,  270,   46,   47,   41,   37,   59,   44,  123,
-   33,   42,   43,   29,   45,   46,   47,   40,   34,   40,
-   40,   37,   45,   59,   40,   61,   41,  265,  275,   44,
-  268,   33,  100,  101,  270,   41,   41,   91,   40,   44,
-  270,  123,   41,   45,   59,   44,   61,   93,   91,  262,
-  263,  264,   33,   41,   44,  265,  123,   93,   59,   40,
-   91,   40,   40,   40,   45,   40,   40,  270,   41,  261,
-   59,   41,   44,   33,   59,  143,   59,   41,   93,   41,
-   40,  125,  123,  123,   41,   45,   41,  123,   49,    2,
-   33,   38,   34,   -1,   33,   99,   -1,   -1,   -1,   -1,
+  125,   46,   34,    9,   37,   91,   40,  270,   40,   42,
+   68,   45,   59,   46,   47,   41,   37,   40,   44,  123,
+   33,   42,   43,   29,   45,   46,   47,   40,   34,  269,
+  270,   37,   45,   59,   40,   61,   41,  265,   40,   44,
+  268,   33,  100,  101,   41,  275,   91,   44,   40,  262,
+  263,  264,   41,   45,   59,   44,   61,   41,   91,  270,
+  270,  123,   33,   93,   41,   44,  265,   93,  123,   40,
+   91,   59,   40,   40,   45,   40,   40,   40,  270,   41,
+   41,   59,  261,   33,   44,  143,   59,   59,   93,   41,
+   40,  125,  123,   41,  123,   45,   41,  123,   41,    2,
+   49,   33,   38,   99,   33,   -1,   -1,   -1,   -1,   -1,
    -1,   40,  125,   -1,   -1,   -1,   45,   -1,  123,   -1,
    -1,   -1,   -1,   -1,   -1,   33,   -1,   -1,   -1,   -1,
    -1,   -1,   40,  125,   33,   -1,   -1,   45,   -1,   -1,
@@ -436,8 +436,8 @@ yycheck = new short[] {                         33,
   266,   -1,   -1,   -1,   59,   60,   61,   62,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,  125,   -1,   -1,   -1,
    -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,   -1,
-   -1,   -1,   -1,   -1,   -1,   -1,   91,  125,   93,  262,
-  263,  264,   -1,  257,  258,  259,  260,   -1,  262,  263,
+   -1,   -1,   -1,   -1,   -1,   -1,   91,  125,   93,   -1,
+   -1,   -1,   -1,  257,  258,  259,  260,   -1,  262,  263,
   264,   -1,   44,  267,   -1,   -1,  270,   -1,   -1,   -1,
    -1,  275,  276,  277,  257,  258,  259,  260,  123,  262,
   263,  264,  278,  279,  267,   -1,   -1,  270,   -1,   -1,
@@ -601,7 +601,7 @@ final static String yyrule[] = {
 "tipo : CHAR",
 "tipo_vector : '[' CTE_ENTERA ']' tipo_ampliado",
 "tipo_struct : STRUCT '{' registros_struct '}'",
-"registros_struct : registros_struct identificadores tipo ';'",
+"registros_struct : registros_struct identificadores tipo_ampliado ';'",
 "registros_struct :",
 "identificadores : IDENT",
 "identificadores : identificadores ',' IDENT",
@@ -865,7 +865,7 @@ case 3:
 break;
 case 4:
 //#line 43 "../../src/sintactico/sintactico.y"
-{yyval = new ArrayList<Definicion>();}
+{yyval = new ArrayList();}
 break;
 case 5:
 //#line 47 "../../src/sintactico/sintactico.y"
@@ -873,7 +873,7 @@ case 5:
 break;
 case 6:
 //#line 48 "../../src/sintactico/sintactico.y"
-{yyval = new ArrayList<Definicion>();}
+{yyval = new ArrayList();}
 break;
 case 7:
 //#line 51 "../../src/sintactico/sintactico.y"
@@ -914,7 +914,7 @@ case 14:
 break;
 case 15:
 //#line 73 "../../src/sintactico/sintactico.y"
-{yyval = new TipoArray((int)val_peek(2),(Tipo)val_peek(0));}
+{yyval = new TipoArray(Integer.parseInt((String)val_peek(2)),(Tipo)val_peek(0));}
 break;
 case 16:
 //#line 76 "../../src/sintactico/sintactico.y"
@@ -922,7 +922,7 @@ case 16:
 break;
 case 17:
 //#line 79 "../../src/sintactico/sintactico.y"
-{yyval = val_peek(3); for(String nombre: (List<String>)val_peek(2)){((List)yyval).add(new Campo(nombre,(List<Tipo>)val_peek(1)));}}
+{yyval = val_peek(3); for(String nombre: (List<String>)val_peek(2)){((List)yyval).add(new Campo(nombre,(Tipo)val_peek(1)));}}
 break;
 case 18:
 //#line 80 "../../src/sintactico/sintactico.y"
@@ -980,39 +980,39 @@ case 30:
 break;
 case 31:
 //#line 116 "../../src/sintactico/sintactico.y"
-{yyval = new Asignacion(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(3),(Expresion)val_peek(1));}
+{yyval = new Asignacion(lexico.getLinea(),lexico.getColumna(),val_peek(3),val_peek(1));}
 break;
 case 32:
 //#line 117 "../../src/sintactico/sintactico.y"
-{yyval = new SentenciaIf(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(3),(List<Sentencia>)val_peek(1), new ArrayList<Sentencia>());}
+{yyval = new SentenciaIf(lexico.getLinea(),lexico.getColumna(),val_peek(3),val_peek(1), new ArrayList<Sentencia>());}
 break;
 case 33:
 //#line 118 "../../src/sintactico/sintactico.y"
-{yyval = new SentenciaIf(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(7),(List<Sentencia>)val_peek(5),(List<Sentencia>)val_peek(1));}
+{yyval = new SentenciaIf(lexico.getLinea(),lexico.getColumna(),val_peek(7),val_peek(5),val_peek(1));}
 break;
 case 34:
 //#line 119 "../../src/sintactico/sintactico.y"
-{yyval = new SentenciaWhile(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(3),(List<Sentencia>)val_peek(1));}
+{yyval = new SentenciaWhile(lexico.getLinea(),lexico.getColumna(),val_peek(3),val_peek(1));}
 break;
 case 35:
 //#line 120 "../../src/sintactico/sintactico.y"
-{yyval = new SentenciaFuncion(lexico.getLinea(),lexico.getColumna(),new Variable(lexico.getLinea(),lexico.getColumna(),(String)val_peek(4)),(List<Expresion>)val_peek(2));}
+{yyval = new SentenciaFuncion(lexico.getLinea(),lexico.getColumna(),new Variable(lexico.getLinea(),lexico.getColumna(),val_peek(4)),val_peek(2));}
 break;
 case 36:
 //#line 121 "../../src/sintactico/sintactico.y"
-{yyval = new Escritura(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2));}
+{yyval = new Escritura(lexico.getLinea(),lexico.getColumna(),val_peek(2));}
 break;
 case 37:
 //#line 122 "../../src/sintactico/sintactico.y"
-{yyval = new Lectura(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2));}
+{yyval = new Lectura(lexico.getLinea(),lexico.getColumna(),val_peek(2));}
 break;
 case 38:
 //#line 123 "../../src/sintactico/sintactico.y"
-{yyval = new SentenciaReturn(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(1));}
+{yyval = new SentenciaReturn(lexico.getLinea(),lexico.getColumna(),val_peek(1));}
 break;
 case 39:
 //#line 126 "../../src/sintactico/sintactico.y"
-{yyval = new ExpresionCast(lexico.getLinea(),lexico.getColumna(),(Tipo)val_peek(3),(Expresion)val_peek(1));}
+{yyval = new ExpresionCast(lexico.getLinea(),lexico.getColumna(),val_peek(3),val_peek(1));}
 break;
 case 40:
 //#line 129 "../../src/sintactico/sintactico.y"
@@ -1032,27 +1032,27 @@ case 43:
 break;
 case 44:
 //#line 137 "../../src/sintactico/sintactico.y"
-{yyval = new ExpresionAritmetica(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2),(String)val_peek(1),(Expresion)val_peek(0));}
+{yyval = new ExpresionAritmetica(lexico.getLinea(),lexico.getColumna(),val_peek(2),val_peek(1),val_peek(0));}
 break;
 case 45:
 //#line 138 "../../src/sintactico/sintactico.y"
-{yyval = new ExpresionAritmetica(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2),(String)val_peek(1),(Expresion)val_peek(0));}
+{yyval = new ExpresionAritmetica(lexico.getLinea(),lexico.getColumna(),val_peek(2),val_peek(1),val_peek(0));}
 break;
 case 46:
 //#line 139 "../../src/sintactico/sintactico.y"
-{yyval = new ExpresionAritmetica(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2),(String)val_peek(1),(Expresion)val_peek(0));}
+{yyval = new ExpresionAritmetica(lexico.getLinea(),lexico.getColumna(),val_peek(2),val_peek(1),val_peek(0));}
 break;
 case 47:
 //#line 140 "../../src/sintactico/sintactico.y"
-{yyval = new ExpresionFuncion(lexico.getLinea(),lexico.getColumna(),new Variable(lexico.getLinea(),lexico.getColumna(),(String)val_peek(3)),(List<Expresion>)val_peek(1));}
+{yyval = new ExpresionFuncion(lexico.getLinea(),lexico.getColumna(),new Variable(lexico.getLinea(),lexico.getColumna(),val_peek(3)),val_peek(1));}
 break;
 case 48:
 //#line 141 "../../src/sintactico/sintactico.y"
-{yyval = new ExpresionAritmetica(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2),(String)val_peek(1),(Expresion)val_peek(0));}
+{yyval = new ExpresionAritmetica(lexico.getLinea(),lexico.getColumna(),val_peek(2),val_peek(1),val_peek(0));}
 break;
 case 49:
 //#line 142 "../../src/sintactico/sintactico.y"
-{yyval = new ExpresionAritmetica(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2),(String)val_peek(1),(Expresion)val_peek(0));}
+{yyval = new ExpresionAritmetica(lexico.getLinea(),lexico.getColumna(),val_peek(2),val_peek(1),val_peek(0));}
 break;
 case 50:
 //#line 143 "../../src/sintactico/sintactico.y"
@@ -1060,7 +1060,7 @@ case 50:
 break;
 case 51:
 //#line 144 "../../src/sintactico/sintactico.y"
-{yyval = new MenosUnario(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(0));}
+{yyval = new MenosUnario(lexico.getLinea(),lexico.getColumna(),val_peek(0));}
 break;
 case 52:
 //#line 145 "../../src/sintactico/sintactico.y"
@@ -1068,63 +1068,63 @@ case 52:
 break;
 case 53:
 //#line 146 "../../src/sintactico/sintactico.y"
-{yyval = new AccesoArray(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(3),(Expresion)val_peek(1));}
+{yyval = new AccesoArray(lexico.getLinea(),lexico.getColumna(),val_peek(3),val_peek(1));}
 break;
 case 54:
 //#line 147 "../../src/sintactico/sintactico.y"
-{yyval = new ExpresionLogica(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2),(String)val_peek(1),(Expresion)val_peek(0));}
+{yyval = new ExpresionLogica(lexico.getLinea(),lexico.getColumna(),val_peek(2),val_peek(1),val_peek(0));}
 break;
 case 55:
 //#line 148 "../../src/sintactico/sintactico.y"
-{yyval = new ExpresionLogica(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2),(String)val_peek(1),(Expresion)val_peek(0));}
+{yyval = new ExpresionLogica(lexico.getLinea(),lexico.getColumna(),val_peek(2),val_peek(1),val_peek(0));}
 break;
 case 56:
 //#line 149 "../../src/sintactico/sintactico.y"
-{yyval = new Comparacion(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2),(String)val_peek(1),(Expresion)val_peek(0));}
+{yyval = new Comparacion(lexico.getLinea(),lexico.getColumna(),val_peek(2),val_peek(1),val_peek(0));}
 break;
 case 57:
 //#line 150 "../../src/sintactico/sintactico.y"
-{yyval = new Comparacion(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2),(String)val_peek(1),(Expresion)val_peek(0));}
+{yyval = new Comparacion(lexico.getLinea(),lexico.getColumna(),val_peek(2),val_peek(1),val_peek(0));}
 break;
 case 58:
 //#line 151 "../../src/sintactico/sintactico.y"
-{yyval = new Comparacion(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2),(String)val_peek(1),(Expresion)val_peek(0));}
+{yyval = new Comparacion(lexico.getLinea(),lexico.getColumna(),val_peek(2),val_peek(1),val_peek(0));}
 break;
 case 59:
 //#line 152 "../../src/sintactico/sintactico.y"
-{yyval = new Comparacion(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2),(String)val_peek(1),(Expresion)val_peek(0));}
+{yyval = new Comparacion(lexico.getLinea(),lexico.getColumna(),val_peek(2),val_peek(1),val_peek(0));}
 break;
 case 60:
 //#line 153 "../../src/sintactico/sintactico.y"
-{yyval = new Comparacion(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2),(String)val_peek(1),(Expresion)val_peek(0));}
+{yyval = new Comparacion(lexico.getLinea(),lexico.getColumna(),val_peek(2),val_peek(1),val_peek(0));}
 break;
 case 61:
 //#line 154 "../../src/sintactico/sintactico.y"
-{yyval = new Comparacion(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2),(String)val_peek(1),(Expresion)val_peek(0));}
+{yyval = new Comparacion(lexico.getLinea(),lexico.getColumna(),val_peek(2),val_peek(1),val_peek(0));}
 break;
 case 62:
 //#line 155 "../../src/sintactico/sintactico.y"
-{yyval = new Negacion(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(0));}
+{yyval = new Negacion(lexico.getLinea(),lexico.getColumna(),val_peek(0));}
 break;
 case 63:
 //#line 156 "../../src/sintactico/sintactico.y"
-{yyval = new AccesoACampo(lexico.getLinea(),lexico.getColumna(),(Expresion)val_peek(2),(String)val_peek(0));}
+{yyval = new AccesoACampo(lexico.getLinea(),lexico.getColumna(),val_peek(2),val_peek(0));}
 break;
 case 64:
 //#line 157 "../../src/sintactico/sintactico.y"
-{yyval = new CTE_Entera(lexico.getLinea(),lexico.getColumna(),(String)val_peek(0));}
+{yyval = new CTE_Entera(lexico.getLinea(),lexico.getColumna(),val_peek(0));}
 break;
 case 65:
 //#line 158 "../../src/sintactico/sintactico.y"
-{yyval = new CTE_Real(lexico.getLinea(),lexico.getColumna(),(String)val_peek(0));}
+{yyval = new CTE_Real(lexico.getLinea(),lexico.getColumna(),val_peek(0));}
 break;
 case 66:
 //#line 159 "../../src/sintactico/sintactico.y"
-{yyval = new CTE_Caracter(lexico.getLinea(),lexico.getColumna(),(String)val_peek(0));}
+{yyval = new CTE_Caracter(lexico.getLinea(),lexico.getColumna(),val_peek(0));}
 break;
 case 67:
 //#line 160 "../../src/sintactico/sintactico.y"
-{yyval = new Variable(lexico.getLinea(),lexico.getColumna(),(String)val_peek(0));}
+{yyval = new Variable(lexico.getLinea(),lexico.getColumna(),val_peek(0));}
 break;
 //#line 1061 "Parser.java"
 //########## END OF USER-SUPPLIED ACTIONS ##########

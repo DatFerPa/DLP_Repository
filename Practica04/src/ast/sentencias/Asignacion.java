@@ -15,6 +15,13 @@ public class Asignacion extends NodoASTAbstract implements Sentencia {
 		this.izquierda = izquierda;
 		this.derecha = derecha;
 	}
+	
+	public Asignacion(int linea, int columna, Object izquierda, Object derecha) {
+		setLinea(linea);
+		setColumna(columna);
+		this.izquierda = (Expresion)izquierda;
+		this.derecha = (Expresion)derecha;
+	}
 
 	@Override
 	public String toString() {

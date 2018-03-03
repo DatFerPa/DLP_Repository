@@ -11,6 +11,12 @@ public class Variable extends NodoASTAbstract implements Expresion {
 		setColumna(columna);
 		this.nombre = nombre;
 	}
+	
+	public Variable (int linea, int columna, Object nombre) {
+		setLinea(linea);
+		setColumna(columna);
+		this.nombre = (String)nombre;
+	}
 
 	@Override
 	public String toString() {

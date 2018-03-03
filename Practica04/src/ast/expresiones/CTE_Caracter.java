@@ -13,6 +13,13 @@ public class CTE_Caracter extends NodoASTAbstract implements Expresion {
 			setLinea(linea);
 			setColumna(columna);
 		}
+		
+		public CTE_Caracter(int linea, int columna,Object valor) {
+			super();
+			this.valor = (String)valor;
+			setLinea(linea);
+			setColumna(columna);
+		}
 
 		@Override
 		public String toString() {

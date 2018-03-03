@@ -16,6 +16,14 @@ public class ExpresionLogica extends NodoASTAbstract implements Expresion {
 		this.operando1 = operando1;
 		this.operando2 = operando2;
 	}
+	
+	public ExpresionLogica(int linea, int columna, Object operando1, Object operador, Object operando2) {
+		setLinea(linea);
+		setColumna(columna);
+		this.operador = (String)operador;
+		this.operando1 = (Expresion)operando1;
+		this.operando2 = (Expresion)operando2;
+	}
 
 	@Override
 	public String toString() {

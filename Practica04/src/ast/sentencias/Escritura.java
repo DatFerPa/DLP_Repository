@@ -12,6 +12,12 @@ public class Escritura extends NodoASTAbstract implements Sentencia{
 		setColumna(columna);
 		this.expresion = expresion;
 	}
+	
+	public Escritura(int linea, int columna,Object expresion) {
+		setLinea(linea);
+		setColumna(columna);
+		this.expresion = (Expresion)expresion;
+	}
 
 	@Override
 	public String toString() {

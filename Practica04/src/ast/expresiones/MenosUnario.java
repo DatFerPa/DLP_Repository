@@ -12,6 +12,12 @@ public class MenosUnario extends NodoASTAbstract implements Expresion {
 		setColumna(columna);
 		this.operando = operando;
 	}
+	
+	public MenosUnario(int linea,int columna,Object operando) {
+		setLinea(linea);
+		setColumna(columna);
+		this.operando = (Expresion)operando;
+	}
 
 	@Override
 	public String toString() {

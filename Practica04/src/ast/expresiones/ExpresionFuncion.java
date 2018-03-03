@@ -16,6 +16,14 @@ public class ExpresionFuncion extends NodoASTAbstract implements Expresion {
 			setLinea(linea);
 			setColumna(columna);
 		}
+		
+		public ExpresionFuncion(int linea, int columna,Object identificador, Object argumentos) {
+			super();
+			this.identificador = (Variable)identificador;
+			this.argumentos = (List<Expresion>)argumentos;
+			setLinea(linea);
+			setColumna(columna);
+		}
 
 		@Override
 		public String toString() {

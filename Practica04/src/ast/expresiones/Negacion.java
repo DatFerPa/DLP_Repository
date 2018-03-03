@@ -13,6 +13,13 @@ public class Negacion extends NodoASTAbstract implements Expresion {
 		setLinea(linea);
 		setColumna(columna);		
 	}
+	
+	public Negacion(int linea,int columna,Object expresion) {
+		super();
+		this.expresion = (Expresion)expresion;
+		setLinea(linea);
+		setColumna(columna);		
+	}
 
 	@Override
 	public String toString() {

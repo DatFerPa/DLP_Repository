@@ -18,6 +18,13 @@ public class SentenciaFuncion extends NodoASTAbstract implements Sentencia {
 		this.cuerpo = cuerpo;
 		this.identificador = identificador;
 	}
+	
+	public SentenciaFuncion (int linea, int columna, Object identificador, Object cuerpo) {
+		setLinea(linea);
+		setColumna(columna);
+		this.cuerpo = (List<Expresion>) cuerpo;
+		this.identificador = (Variable) identificador;
+	}
 
 	@Override
 	public String toString() {

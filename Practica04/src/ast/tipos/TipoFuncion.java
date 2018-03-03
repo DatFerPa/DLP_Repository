@@ -14,6 +14,11 @@ public class TipoFuncion implements Tipo {
 		this.argumentos = argumentos;
 		this.tipoRetorno = tipoRetorno;
 	}
+	
+	public TipoFuncion(Object tipoRetorno,Object argumentos) {
+		this.argumentos = (List<DefVariable>)argumentos;
+		this.tipoRetorno = (Tipo)tipoRetorno;
+	}
 
 	@Override
 	public String toString() {

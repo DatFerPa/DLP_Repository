@@ -16,11 +16,21 @@ public class ExpresionCast extends NodoASTAbstract implements Expresion {
 		setLinea(linea);
 		setColumna(columna);
 	}
-
-	public ExpresionCast(Tipo tipo, Expresion expresion) {
+	
+	public ExpresionCast(int linea, int columna,Object tipo, Object expresion) {
 		super();
-		this.tipo = tipo;
-		this.expresion = expresion;
+		this.tipo = (Tipo)tipo;
+		this.expresion = (Expresion)expresion;
+		setLinea(linea);
+		setColumna(columna);
 	}
+
+	@Override
+	public String toString() {
+		return "ExpresionCast [tipo=" + tipo + ", expresion=" + expresion + ", getLinea()=" + getLinea()
+				+ ", getColumna()=" + getColumna() + "]";
+	}
+
+	
 			
 }

@@ -16,6 +16,15 @@ public class Comparacion extends NodoASTAbstract implements Expresion {
 		this.operador = operador;
 		this.operando2 = operando2;
 	}
+	
+	public Comparacion(int linea, int columna,Object operando1, Object operador, Object operando2) {
+		super();
+		setLinea(linea);
+		setColumna(columna);
+		this.operando1 = (Expresion)operando1;
+		this.operador = (String)operador;
+		this.operando2 = (Expresion)operando2;
+	}
 
 	@Override
 	public String toString() {

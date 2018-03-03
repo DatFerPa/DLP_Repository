@@ -4,11 +4,14 @@ import java.util.List;
 
 public class TipoStruct implements Tipo {
 	
-	private static TipoStruct instancia;
 	private List<Campo> campos;
 	
-	public TipoStruct(List<Campo>campos) {
+	public TipoStruct(List<Campo> campos) {
 		this.campos = campos;
+	}
+	
+	public TipoStruct(Object campos) {
+		this.campos = (List<Campo>)campos;
 	}
 	
 

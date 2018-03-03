@@ -25,7 +25,7 @@
 
   16  tipo_struct : STRUCT '{' registros_struct '}'
 
-  17  registros_struct : registros_struct identificadores tipo ';'
+  17  registros_struct : registros_struct identificadores tipo_ampliado ';'
   18                   |
 
   19  identificadores : IDENT
@@ -345,7 +345,7 @@ state 32
 
 state 33
 	tipo_struct : STRUCT '{' registros_struct . '}'  (16)
-	registros_struct : registros_struct . identificadores tipo ';'  (17)
+	registros_struct : registros_struct . identificadores tipo_ampliado ';'  (17)
 
 	IDENT  shift 7
 	'}'  shift 39
@@ -414,16 +414,21 @@ state 39
 
 
 state 40
-	registros_struct : registros_struct identificadores . tipo ';'  (17)
+	registros_struct : registros_struct identificadores . tipo_ampliado ';'  (17)
 	identificadores : identificadores . ',' IDENT  (20)
 
 	INT  shift 13
 	FLOAT32  shift 14
 	CHAR  shift 15
+	STRUCT  shift 16
+	'['  shift 17
 	','  shift 18
 	.  error
 
-	tipo  goto 46
+	tipo_ampliado  goto 46
+	tipo  goto 20
+	tipo_vector  goto 21
+	tipo_struct  goto 22
 
 
 state 41
@@ -479,7 +484,7 @@ state 45
 
 
 state 46
-	registros_struct : registros_struct identificadores tipo . ';'  (17)
+	registros_struct : registros_struct identificadores tipo_ampliado . ';'  (17)
 
 	';'  shift 50
 	.  error
@@ -529,7 +534,7 @@ state 49
 
 
 state 50
-	registros_struct : registros_struct identificadores tipo ';' .  (17)
+	registros_struct : registros_struct identificadores tipo_ampliado ';' .  (17)
 
 	.  reduce 17
 

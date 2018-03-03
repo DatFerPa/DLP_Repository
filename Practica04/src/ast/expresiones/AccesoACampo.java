@@ -13,6 +13,15 @@ public class AccesoACampo extends NodoASTAbstract implements Expresion {
 		setLinea(linea);
 		setColumna(columna);
 	}
+	
+	public AccesoACampo(int linea, int columna,Object izq, Object nombre) {
+		super();
+		this.izq = (Expresion)izq;
+		this.nombre = (String)nombre;
+		setLinea(linea);
+		setColumna(columna);
+	}
+	
 	@Override
 	public String toString() {
 		return "AccesoACampo [izq=" + izq + ", nombre=" + nombre + ", getLinea()=" + getLinea() + ", getColumna()="

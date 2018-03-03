@@ -10,6 +10,11 @@ public class TipoArray implements Tipo {
 		this.tam = tam;
 		this.tipo_retorno = tipo_retorno;
 	}
+	
+	public TipoArray(Object tam, Object tipo_retorno) {
+		this.tam = (int)tam;
+		this.tipo_retorno = (Tipo)tipo_retorno;
+	}
 
 
 
