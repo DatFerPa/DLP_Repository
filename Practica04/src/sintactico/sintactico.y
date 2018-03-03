@@ -118,8 +118,8 @@ sentencia: 	expresion '=' expresion ';'											{$$ = new Asignacion(lexico.ge
 		| IF expresion '{' lista_sentencias '}' ELSE '{' lista_sentencias '}'	{$$ = new SentenciaIf(lexico.getLinea(),lexico.getColumna(),$2,$4,$8);}
 		| WHILE expresion '{' lista_sentencias '}'								{$$ = new SentenciaWhile(lexico.getLinea(),lexico.getColumna(),$2,$4);}	
 		| IDENT '(' lista_expresiones_opt ')' ';'								{$$ = new SentenciaFuncion(lexico.getLinea(),lexico.getColumna(),new Variable(lexico.getLinea(),lexico.getColumna(),$1),$3);}	
-		| WRITE '(' expresion ')' ';'											{$$ = new Escritura(lexico.getLinea(),lexico.getColumna(),$3);}
-		| READ '(' expresion ')' ';'											{$$ = new Lectura(lexico.getLinea(),lexico.getColumna(),$3);}
+		| WRITE '(' lista_expresiones ')' ';'											{$$ = new Escritura(lexico.getLinea(),lexico.getColumna(),$3);}
+		| READ '(' lista_expresiones ')' ';'											{$$ = new Lectura(lexico.getLinea(),lexico.getColumna(),$3);}
 		| RETURN expresion ';'													{$$ = new SentenciaReturn(lexico.getLinea(),lexico.getColumna(),$2);}
 		; 	 
 	
@@ -142,7 +142,7 @@ expresion: expresion '+' expresion					{$$ = new ExpresionAritmetica(lexico.getL
          | expresion '-' expresion					{$$ = new ExpresionAritmetica(lexico.getLinea(),lexico.getColumna(),$1,$2,$3);}
          | cast										{$$ = $1;}
          | '-' expresion %prec MENOS_UNARIO			{$$ = new MenosUnario(lexico.getLinea(),lexico.getColumna(),$2);}
-         | '(' expresion ')'						{$$ = $1;}	
+         | '(' expresion ')'						{$$ = $2;}	    
          | expresion '[' expresion ']'				{$$ = new AccesoArray(lexico.getLinea(),lexico.getColumna(),$1,$3);}
          | expresion AND expresion					{$$ = new ExpresionLogica(lexico.getLinea(),lexico.getColumna(),$1,$2,$3);}
          | expresion OR expresion					{$$ = new ExpresionLogica(lexico.getLinea(),lexico.getColumna(),$1,$2,$3);}

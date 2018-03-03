@@ -1,13 +1,15 @@
 package ast.sentencias;
 
+import java.util.List;
+
 import ast.Expresion;
 import ast.NodoASTAbstract;
 import ast.Sentencia;
 
 public class Escritura extends NodoASTAbstract implements Sentencia{
-	private Expresion expresion;
+	private List<Expresion> expresion;
 	
-	public Escritura(int linea, int columna,Expresion expresion) {
+	public Escritura(int linea, int columna,List<Expresion> expresion) {
 		setLinea(linea);
 		setColumna(columna);
 		this.expresion = expresion;
@@ -16,7 +18,7 @@ public class Escritura extends NodoASTAbstract implements Sentencia{
 	public Escritura(int linea, int columna,Object expresion) {
 		setLinea(linea);
 		setColumna(columna);
-		this.expresion = (Expresion)expresion;
+		this.expresion = (List<Expresion>)expresion;
 	}
 
 	@Override
