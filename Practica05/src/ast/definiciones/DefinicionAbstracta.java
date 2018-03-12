@@ -8,10 +8,12 @@ public abstract class DefinicionAbstracta extends NodoASTAbstract implements Def
 	private String nombre;
 	private Tipo tipoBase;
 	
-	public DefinicionAbstracta(String nombre, Tipo tipoBase) {
+	public DefinicionAbstracta(int linea,int columna,String nombre, Tipo tipoBase) {
 		super();
 		this.nombre = nombre;
 		this.tipoBase = tipoBase;
+		setLinea(linea);
+		setColumna(columna);
 	}
 
 	@Override

@@ -56,8 +56,16 @@ variable: identificadores tipo_ampliado
 			$$ = new ArrayList();
 			
 			for(String nombre: (List<String>)$1){
-				((List)$$).add(new DefVariable(nombre,(Tipo)$2));
+				((List)$$).add(new DefVariable(lexico.getLinea(),lexico.getColumna(),nombre,(Tipo)$2));
 			}
+			
+			for(int i = 0; i< ((List<String>)$1).size();i++){
+				for(int j = 0 ;j< ((List<String>)$1).size();j++){
+					if(i!=j && i<j && ((List<String>)$1).get(i).equals(((List<String>)$1).get(j))){
+						new TipoError((NodoASTAbstract)((List)$$).get(i),"Variable duplicada");
+					}
+				}
+			}			
 		}
 		;
 							
@@ -107,7 +115,7 @@ lista_parametros: lista_parametros ',' parametro	{$$ = $1; ((List)$$).add($3);}
 		| parametro									{$$ = new ArrayList(); ((List)$$).add($1);}
 		;
 
-parametro: IDENT tipo		{$$ = new DefVariable((String)$1,(Tipo)$2);}
+parametro: IDENT tipo		{$$ = new DefVariable(lexico.getLinea(),lexico.getColumna(),(String)$1,(Tipo)$2);}
 		;		
 
 lista_sentencias: lista_sentencias sentencia	{$$ = $1; ((List)$$).add($2);}

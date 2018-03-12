@@ -28,7 +28,7 @@ public class ME {
 	}
 
 	public boolean huboErrores() {
-		return (errores.size() == 0) ? true : false;
+		return (errores.size() == 0) ? false : true;
 	}
 
 	public void mostrarErrores(PrintStream err) {
