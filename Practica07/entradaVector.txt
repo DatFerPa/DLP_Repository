@@ -1,0 +1,57 @@
+var pair struct {
+    integer int;
+    character char;
+  };
+var real,pop,sdas float32;
+var matrix [10] int;
+var matrix [10][10]int;
+func p() {}
+var real float32;
+
+func f(n int, r float32) int {
+  var real float32;
+  var c1, c2 char;
+  c1 = char(n);
+  real = c1 + n + r;
+  p(); // * Invocacion procedimiento
+  
+  
+   while i < MATRIXSIZE {
+    j = 0;
+    while j < MATRIXSIZE {
+      setValue(i,j, value);
+      j = j + 1;
+    }
+    i = i + 1;
+  }
+  /*
+  if ((row < 0 || row >= MATRIXSIZE) || (columnn < 0 && columnn >= MATRIXSIZE)){
+  	a = a+2;
+  }
+  */
+  
+  return int(c1);
+}
+
+
+
+
+func main() {
+	
+	var pair struct {
+    	integer int;
+    	character char;
+  	};
+  	var anidado struct{
+    	anidado2 [10]struct{
+      		date struct{
+      			day, mounth, year int; 
+      			array [2][2]float32;
+      		};
+    	};
+  	};
+  	var vector [10][5]float32;
+	real = 4.5 + 4. * 3e+3 - 5.4E-3;
+	pedo = pedo + pedo;
+	a[10] = a[15+6][3*3];	
+}
