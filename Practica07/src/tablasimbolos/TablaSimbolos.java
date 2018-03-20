@@ -7,6 +7,7 @@ import ast.definiciones.DefinicionAbstracta;
 
 public class TablaSimbolos {
 
+	int i;
 	private int ambito = 0;
 	private List<Map<String, Definicion>> tabla;
 
@@ -27,10 +28,13 @@ public class TablaSimbolos {
 
 	// no simbolos repetidos en el ambito
 	public boolean insertar(Definicion simbolo) {
-		((DefinicionAbstracta) simbolo).setAmbito(ambito);
-		Definicion def = tabla.get(ambito).put(((DefinicionAbstracta) simbolo).getNombre(), simbolo);
-		// si nos devuelve la definicion, significa que ya existia
-		return (def != null) ? false : true;
+		if(buscarAmbitoActual(((DefinicionAbstracta) simbolo).getNombre())==null) {
+			((DefinicionAbstracta) simbolo).setAmbito(ambito);
+			tabla.get(ambito).put(((DefinicionAbstracta) simbolo).getNombre(), simbolo);
+			return true;
+		}else {
+			return false;
+		}
 	}
 
 	public Definicion buscar(String id) {
@@ -47,5 +51,6 @@ public class TablaSimbolos {
 	public Definicion buscarAmbitoActual(String id) {
 		return tabla.get(ambito).get(id);
 	}
+	
 
 }

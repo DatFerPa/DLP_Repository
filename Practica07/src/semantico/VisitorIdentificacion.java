@@ -1,40 +1,13 @@
 package semantico;
 
-import ast.Programa;
+import ast.Sentencia;
 import ast.definiciones.DefFuncion;
 import ast.definiciones.DefVariable;
-import ast.expresiones.AccesoACampo;
-import ast.expresiones.AccesoArray;
-import ast.expresiones.CTE_Caracter;
-import ast.expresiones.CTE_Entera;
-import ast.expresiones.CTE_Real;
-import ast.expresiones.Comparacion;
-import ast.expresiones.ExpresionAritmetica;
-import ast.expresiones.ExpresionCast;
-import ast.expresiones.ExpresionCompuesta;
-import ast.expresiones.ExpresionFuncion;
-import ast.expresiones.ExpresionLogica;
-import ast.expresiones.MenosUnario;
-import ast.expresiones.Negacion;
+import ast.definiciones.Definicion;
 import ast.expresiones.Variable;
-import ast.sentencias.Asignacion;
-import ast.sentencias.Escritura;
-import ast.sentencias.Lectura;
-import ast.sentencias.SentenciaFuncion;
-import ast.sentencias.SentenciaIf;
-import ast.sentencias.SentenciaReturn;
-import ast.sentencias.SentenciaWhile;
-import ast.tipos.Campo;
-import ast.tipos.TipoArray;
-import ast.tipos.TipoCaracter;
-import ast.tipos.TipoEntero;
 import ast.tipos.TipoError;
 import ast.tipos.TipoFuncion;
-import ast.tipos.TipoReal;
-import ast.tipos.TipoStruct;
-import ast.tipos.TipoVoid;
 import tablasimbolos.TablaSimbolos;
-import visitor.Visitor;
 import visitor.VisitorAbstracto;
 
 public class VisitorIdentificacion extends VisitorAbstracto {
@@ -45,53 +18,60 @@ public class VisitorIdentificacion extends VisitorAbstracto {
 		tablaSimbolos = new TablaSimbolos();
 	}
 
-
-
-
-
-	@Override
-	public Object visitar(ExpresionCast m, Object param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
-	@Override
-	public Object visitar(Campo m, Object param) {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
 	@Override
 	public Object visitar(Variable m, Object param) {
-		super.visitar(m, param);
 		
+		Definicion def = tablaSimbolos.buscar(m.getNombre());
+		if(def == null) {
+			new TipoError(m, "variable no definida");
+		}else {
+			m.setDefinicion(def);
+		}
+		super.visitar(m, param);
 		return null;
 	}
 
 	@Override
-	public Object visitar(DefFuncion m, Object param) {
-		super.visitar(m, param);
+	public Object visitar(DefFuncion m, Object param) {		
 		if(!tablaSimbolos.insertar(m)) {
 			new TipoError(m, "Ya existe una funcion con ese nombre");
 		}
-		m.getTipoBase().aceptar(this, null);
+		
+		tablaSimbolos.set();
+		m.getTipoBase().aceptar(this, param);
+		for(DefVariable defV:m.getVariablesLocales()) {
+			if(tablaSimbolos.buscarAmbitoActual(defV.getNombre())!=null) {
+				new TipoError(defV, "Ya existe una variable con ese nombre");
+			}
+			
+			defV.aceptar(this, param);
+		}		
+		for(Sentencia s: m.getLista_sentencias()) {
+			s.aceptar(this, param);
+		}				
+		tablaSimbolos.reset();
 		
 		return null;
 	}
 
 	@Override
 	public Object visitar(DefVariable m, Object param) {		
-		super.visitar(m, param);
 		if(!tablaSimbolos.insertar(m)) {
 			new TipoError(m, "Ya existe una variable con ese nombre");
-		}		
+		}	
+		m.getTipoBase().aceptar(this, param);
 		return null;
 	}
 
 
 	@Override
 	public Object visitar(TipoFuncion m, Object param) {
+		m.getTipoRetorno().aceptar(this, param);
+		for(DefVariable defV: m.getArgumentos()) {
+			if(!tablaSimbolos.insertar(defV)) {
+				new TipoError(defV, "Ya existe una variable con ese nombre");
+			}
+		}
 		return null;
 	}
 

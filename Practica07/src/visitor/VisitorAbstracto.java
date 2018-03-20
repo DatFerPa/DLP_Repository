@@ -189,13 +189,14 @@ public abstract class VisitorAbstracto implements Visitor{
 
 	@Override
 	public Object visitar(DefFuncion m, Object param) {
+		m.getTipoBase().aceptar(this, param);
 		for(DefVariable dfv:m.getVariablesLocales()) {
 			dfv.aceptar(this, param);
 		}
 		for(Sentencia s: m.getLista_sentencias()) {
 			s.aceptar(this, param);
 		}
-		m.getTipoBase().aceptar(this, param);
+		
 		return null;
 	}
 

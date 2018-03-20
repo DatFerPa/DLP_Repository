@@ -1,0 +1,16 @@
+/IntrospectorDemo.class
+/JFlex.jar
+/Main.class
+/MainSinME.class
+/MainSintactico.class
+/Nodo.class
+/NodoRaiz.class
+/ast/
+/compile.cmd
+/compileIntrospector.cmd
+/lexico/
+/manejadorDeErrores/
+/semantico/
+/sintactico/
+/tablasimbolos/
+/visitor/
