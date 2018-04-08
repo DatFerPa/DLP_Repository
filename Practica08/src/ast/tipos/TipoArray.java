@@ -34,5 +34,12 @@ public class TipoArray extends TipoAbstracto {
 		return visitor.visitar(this, param);
 	}
 	
+	@Override
+	public Tipo corchetes(Tipo indice) {
+		if(!(indice instanceof TipoEntero)) {
+			return new TipoError(this, "El indice del array no es un entero");
+		}
+		return this.de;
+	}
 	
 }

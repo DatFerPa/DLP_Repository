@@ -53,4 +53,8 @@ public class TipoStruct extends TipoAbstracto {
 		}
 		return null;
 	}
+	
+	
+	
+	
 }

@@ -47,6 +47,21 @@ public class TipoEntero extends TipoAbstracto {
 	}
 	
 	@Override
+	public Tipo logica(Tipo expresion) {
+		if(expresion instanceof TipoEntero) {
+			return this;
+		}
+		return null;
+
+	}
+	
+	@Override
+	public Tipo logica() {
+		return this;
+
+	}
+	
+	@Override
 	public Tipo comparacion(Tipo expresion) {
 
 		// instanceof

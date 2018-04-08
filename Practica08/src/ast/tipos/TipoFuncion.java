@@ -6,19 +6,18 @@ import ast.definiciones.DefVariable;
 import visitor.Visitor;
 
 public class TipoFuncion extends TipoAbstracto {
-		
-	
-	private  List<DefVariable> argumentos;
-	private  Tipo tipoRetorno;
 
-	public TipoFuncion(Tipo tipoRetorno,List<DefVariable> argumentos) {
+	private List<DefVariable> argumentos;
+	private Tipo tipoRetorno;
+
+	public TipoFuncion(Tipo tipoRetorno, List<DefVariable> argumentos) {
 		this.argumentos = argumentos;
 		this.tipoRetorno = tipoRetorno;
 	}
-	
-	public TipoFuncion(Object tipoRetorno,Object argumentos) {
-		this.argumentos = (List<DefVariable>)argumentos;
-		this.tipoRetorno = (Tipo)tipoRetorno;
+
+	public TipoFuncion(Object tipoRetorno, Object argumentos) {
+		this.argumentos = (List<DefVariable>) argumentos;
+		this.tipoRetorno = (Tipo) tipoRetorno;
 	}
 
 	@Override
@@ -39,7 +38,20 @@ public class TipoFuncion extends TipoAbstracto {
 		return tipoRetorno;
 	}
 
+	@Override
+	public Tipo parentesis(List<Tipo> argumentos) {
+		if (argumentos.size() != this.argumentos.size()) {
+			return null;
+		}
+		// a partir de aqui se presupone que tienen el mismo tamaño
+		for (int i = 0; i < argumentos.size(); i++) {
+			if(argumentos.get(i).getClass() != this.argumentos.get(i).getTipoBase().getClass()) {
+				return null;
+			}
+		}
 
-	
-	
+		return this.tipoRetorno;
+
+	}
+
 }

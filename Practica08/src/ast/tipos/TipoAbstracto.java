@@ -23,7 +23,7 @@ public abstract class TipoAbstracto extends NodoASTAbstract implements Tipo {
 		// instanceof
 		if (expresion instanceof TipoError) {
 			return expresion;
-		}		
+		}
 		return null;// cuando lo llame desde el visitor
 		// devuelva el null, hago allí la llamada al new Tipo Error, para usar ese nodo
 		// AST, con la linea y la columna correctas
@@ -38,7 +38,7 @@ public abstract class TipoAbstracto extends NodoASTAbstract implements Tipo {
 
 	@Override
 	public Tipo logica(Tipo expresion) {
-		return expresion;
+		return null;
 
 	}
 
@@ -51,12 +51,11 @@ public abstract class TipoAbstracto extends NodoASTAbstract implements Tipo {
 	@Override
 	public Tipo punto(String campo) {
 		return null;
-
 	}
 
 	@Override
 	public Tipo corchetes(Tipo indice) {
-		return indice;
+		return new TipoError((TipoAbstracto) indice, "no es un tipo array");
 
 	}
 

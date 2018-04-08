@@ -7,15 +7,15 @@ func f(a int) int {
 }//no tenemos promocion implicita de tipos (aunque podria ser una ampliacion)
 
 func g(b int, b float32) { // * Error 3 revisar esto, no se tiene que permitir mismos parametros
-  return 3; // * Error 4
+  return 3; // * Error 4 no tiene que existir un return ¿pasar el tipo por parametro del visitor?
 }
 
-func g() {	// * Error 5
+func g() {	// * Error 5 ya existe
 }
 
 func main() {
   f();       // * Error 6
   f(3.2);    // * Error 7
-  i=g();     // * Error 8
+  i=g();     // * Error 8 tipo void tambien cuenta
 }
 

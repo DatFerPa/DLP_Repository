@@ -23,4 +23,9 @@ public class TipoVoid extends TipoAbstracto {
 	public Object aceptar(Visitor visitor, Object param) {
 		return visitor.visitar(this, param);
 	}
+	
+	@Override
+	public Tipo equivalente(Tipo tipo) {
+		return new TipoError(this,"El la funcion tiene retorno void y no deberia de tener una sentencia return");
+	}
 }

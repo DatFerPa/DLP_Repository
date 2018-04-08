@@ -17,10 +17,6 @@ public class VisitorSemantico extends VisitorAbstracto {
 		if (!m.getIzquierda().isLvalue()) {
 			new TipoError(m.getIzquierda(), "Lvalue required");
 		}
-		//cambiar igual
-		if(m.getIzquierda().getTipo().equivalente(m.getDerecha().getTipo())==null) {
-			new TipoError(m,"El tipo de no coincide");
-		}
 		return null;
 	}
 
