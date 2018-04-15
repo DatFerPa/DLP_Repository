@@ -38,6 +38,15 @@ public class TipoCaracter extends TipoAbstracto {
 	}
 	
 	@Override
+	public Tipo equivalente(Tipo tipo) {
+		if (tipo instanceof TipoCaracter) {
+			return this;
+		} else {
+			return null;
+		}
+	}
+	
+	@Override
 	public Tipo logica() {
 		return this;
 

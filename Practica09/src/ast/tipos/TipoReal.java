@@ -30,6 +30,15 @@ public class TipoReal extends TipoAbstracto {
 		}
 		return null;
 	}
+	
+	@Override
+	public Tipo equivalente(Tipo tipo) {
+		if (tipo instanceof TipoReal) {
+			return this;
+		} else {
+			return null;
+		}
+	}
 
 	@Override
 	public Tipo comparacion(Tipo expresion) {

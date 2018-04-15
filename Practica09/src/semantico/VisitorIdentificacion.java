@@ -67,7 +67,7 @@ public class VisitorIdentificacion extends VisitorAbstracto {
 			defV.aceptar(this, param);
 		}
 		for (Sentencia s : m.getLista_sentencias()) {
-			s.aceptar(this, m.getTipoBase());
+			s.aceptar(this, ((TipoFuncion)m.getTipoBase()).getTipoRetorno());
 		}
 		tablaSimbolos.reset();
 
