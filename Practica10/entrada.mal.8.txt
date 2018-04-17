@@ -1,0 +1,17 @@
+
+var i int;
+var f float32;
+
+var a struct  {
+  a int;
+};
+
+func main() {
+  write(i && f); // * Error 1 solo con enteros las expresiones logicas
+  write(a >= 3); // * Error 2 
+  while f {     // * Error 3 permitimos caracter y entero; dentro de los while e if
+    if f {      // * Error 4
+      write(!f);   // * Error 5 negacion logica (solo con caracteres y enteros)
+	}
+  }
+}

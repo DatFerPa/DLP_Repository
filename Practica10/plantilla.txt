@@ -1,0 +1,70 @@
+ejecutar[[Programa: programa -> definicion*]] =
+	<source> programa.file_name
+	
+	for(Definicion def definicion*)
+		if def instanceof DefVariable
+			ejecutar[[def]]
+				
+	<call> main 
+	<halt>
+	
+	for(Definicion def definicion*)
+		if def instanceof DefFuncion
+			ejecutar[[def]]
+
+
+ejecutar[[Escritura: sentencia -> expresion*]] =
+	
+	for(Expresion exp: expresion*)
+		valor[[exp]]
+		<out>
+
+ejecutar[[Lectura: sentencia -> expresion*]] =
+
+	for(Expresion exp: expresion*)
+		direccion[[expresion]]
+		<in>
+		<store>
+
+		
+ejecutar[[Asignacion: sentencia -> expresion_1 expresion_2]]		
+		
+	direccion[[expresion_1]]
+	valor[[expresion_2]]	
+	<store>	
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+		
