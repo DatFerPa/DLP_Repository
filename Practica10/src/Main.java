@@ -2,6 +2,7 @@ import java.io.FileReader;
 import java.io.IOException;
 
 import ast.NodoAST;
+import generacionCodigo.VisitorGCEjecutor;
 import generacionCodigo.VisitorOffset;
 import introspector.model.IntrospectorModel;
 import introspector.view.IntrospectorTree;
@@ -42,7 +43,9 @@ public class Main {
 		
 		Visitor vOffset = new VisitorOffset();
 		nodoRaiz.aceptar(vOffset,null);
-				
+		
+		Visitor vGC = new VisitorGCEjecutor(args[0], args[1]);
+		nodoRaiz.aceptar(vGC, null);		
 		// * Comprobamos si hubo errores
 		if(ME.getME().huboErrores()){
 			// * Mostramos los errores

@@ -34,6 +34,10 @@ public class TipoArray extends TipoAbstracto {
 		return visitor.visitar(this, param);
 	}
 	
+	public int getTam() {
+		return tam;
+	}
+
 	@Override
 	public Tipo corchetes(Tipo indice) {
 		if(!(indice instanceof TipoEntero)) {

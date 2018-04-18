@@ -33,6 +33,8 @@ public class CTE_Real extends AbstractExpresion {
 		return visitor.visitar(this, param);
 	};
 	
-	
+	public String getValor() {
+		return valor;
+	}
 	
 }

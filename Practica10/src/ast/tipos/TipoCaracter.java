@@ -17,6 +17,14 @@ public class TipoCaracter extends TipoAbstracto {
 		return instancia;
 
 	}
+	
+	@Override
+	public Tipo aritmetica(Tipo expresion) {
+		if (expresion instanceof TipoCaracter) {
+			return this;
+		}
+		return null;
+	}
 
 	@Override
 	public Object aceptar(Visitor visitor, Object param) {
@@ -30,12 +38,6 @@ public class TipoCaracter extends TipoAbstracto {
 		} else {
 			return null;
 		}
-	}
-
-	@Override
-	public Tipo logica() {
-		return this;
-
 	}
 
 	@Override

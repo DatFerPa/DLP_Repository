@@ -8,7 +8,7 @@ public abstract class TipoAbstracto extends NodoASTAbstract implements Tipo {
 
 	@Override
 	public Tipo aritmetica(Tipo expresion) {
-		return new TipoError((NodoASTAbstract) expresion, "Tipo es incorrecto");
+		return null;
 	}
 
 	@Override

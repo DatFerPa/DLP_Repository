@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import ast.AbstractExpresion;
+import ast.NodoASTAbstract;
 import ast.Sentencia;
 import ast.definiciones.DefFuncion;
 import ast.definiciones.DefVariable;
@@ -67,7 +68,7 @@ public class VisitorIdentificacion extends VisitorAbstracto {
 			defV.aceptar(this, param);
 		}
 		for (Sentencia s : m.getLista_sentencias()) {
-			s.aceptar(this, ((TipoFuncion)m.getTipoBase()).getTipoRetorno());
+			s.aceptar(this, ((TipoFuncion) m.getTipoBase()).getTipoRetorno());
 		}
 		tablaSimbolos.reset();
 
@@ -87,7 +88,7 @@ public class VisitorIdentificacion extends VisitorAbstracto {
 	public Object visitar(TipoFuncion m, Object param) {
 		m.getTipoRetorno().aceptar(this, param);
 		for (DefVariable defV : m.getArgumentos()) {
-			//le decimos a la variable, que es parte del parametro ()
+			// le decimos a la variable, que es parte del parametro ()
 			defV.setParametro(true);
 			if (!tablaSimbolos.insertar(defV)) {
 				new TipoError(defV, "Ya existe una variable con ese nombre");
@@ -132,7 +133,11 @@ public class VisitorIdentificacion extends VisitorAbstracto {
 	@Override
 	public Object visitar(ExpresionAritmetica m, Object param) {
 		super.visitar(m, param);
-		m.setTipo(m.getOperando1().getTipo().aritmetica(m.getOperando2().getTipo()));
+		Tipo tipo = m.getOperando1().getTipo().aritmetica(m.getOperando2().getTipo());
+		if (tipo == null) {
+			return new TipoError(m, "Los tipos tienen que ser iguales en las expresiones aritmeticas");
+		}
+		m.setTipo(tipo);
 		return null;
 	}
 
@@ -226,7 +231,7 @@ public class VisitorIdentificacion extends VisitorAbstracto {
 	@Override
 	public Object visitar(SentenciaFuncion m, Object param) {
 		super.visitar(m, param);
-		
+
 		List<Tipo> tipos = new ArrayList<Tipo>();
 		for (AbstractExpresion exp : m.getargumentos()) {
 			tipos.add(exp.getTipo());
@@ -244,8 +249,8 @@ public class VisitorIdentificacion extends VisitorAbstracto {
 	@Override
 	public Object visitar(SentenciaIf m, Object param) {
 		super.visitar(m, param);
-		if(m.getCondicion().getTipo().esLogica()==false) {
-			new TipoError(m,"El tipo de la condicion tiene que ser de tipo entero o caracter");
+		if (m.getCondicion().getTipo().esLogica() == false) {
+			new TipoError(m, "El tipo de la condicion tiene que ser de tipo entero o caracter");
 		}
 		return null;
 	}
@@ -253,8 +258,8 @@ public class VisitorIdentificacion extends VisitorAbstracto {
 	@Override
 	public Object visitar(SentenciaWhile m, Object param) {
 		super.visitar(m, param);
-		if(m.getCondicion().getTipo().esLogica()==false) {
-			new TipoError(m,"El tipo de la condicion tiene que ser de tipo entero o caracter");
+		if (m.getCondicion().getTipo().esLogica() == false) {
+			new TipoError(m, "El tipo de la condicion tiene que ser de tipo entero o caracter");
 		}
 		return null;
 	}
@@ -262,16 +267,13 @@ public class VisitorIdentificacion extends VisitorAbstracto {
 	@Override
 	public Object visitar(SentenciaReturn m, Object param) {
 		super.visitar(m, param);
-		//vamos a usar el tipo que pasamos por parametro
-		Tipo tipo =((Tipo)param).equivalente(m.getExp().getTipo());
-		if(tipo == null) {
-			new TipoError(m,"El tipo de la sentencia return no se corresponde con el de la definicion de la funcion");
+		// vamos a usar el tipo que pasamos por parametro
+		Tipo tipo = ((Tipo) param).equivalente(m.getExp().getTipo());
+		if (tipo == null) {
+			new TipoError(m, "El tipo de la sentencia return no se corresponde con el de la definicion de la funcion");
 		}
 		return null;
 	}
-	
-	
-	
 
 	/*
 	 * @Override public Object visitar( m, Object param) { super.visitar(m, param);

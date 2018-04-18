@@ -30,6 +30,10 @@ public class CTE_Caracter extends AbstractExpresion {
 					+ "]";
 		}
 
+		public String getValor() {
+			return valor;
+		}
+
 		@Override
 		public Object aceptar(Visitor visitor, Object param) {
 			return visitor.visitar(this, param);

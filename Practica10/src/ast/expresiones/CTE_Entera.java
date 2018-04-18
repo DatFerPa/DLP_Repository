@@ -28,6 +28,8 @@ public class CTE_Entera extends AbstractExpresion {
 	public Object aceptar(Visitor visitor, Object param) {
 		return visitor.visitar(this, param);
 	}
-	
+	public String getValor() {
+		return valor;
+	}
 	
 }
