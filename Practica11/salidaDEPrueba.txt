@@ -1,0 +1,115 @@
+#source "entradaPractica10.txt"
+	' var c char ( offset 0 )
+	' var a int ( offset 0 )
+	' var r float32 ( offset 0 )
+call main
+halt
+main:
+	' * Parameters
+	' * Local variables
+	' var a int ( offset -2 )
+	' var i int ( offset -4 )
+enter 4
+pusha 0
+pushb 'a'
+storeb
+pusha 0
+loadb
+outb
+pushb '\n'
+outb
+pusha bp
+pushi -2
+addi
+pushi 1
+storei
+pusha bp
+pushi -4
+addi
+pushi 3
+muli
+storei
+pusha bp
+pushi -2
+addi
+loadi
+outi
+pushb ' '
+outb
+pusha bp
+pushi -4
+addi
+loadi
+outi
+pushb '\n'
+outb
+pusha 0
+out
+storef
+pusha 0
+loadf
+mulf
+outf
+pushb '\n'
+outb
+pushf 4.5
+subf
+outf
+pushb ' '
+outb
+pushf 48.0
+divf
+outf
+pushb ' '
+outb
+pushb '0'
+b2i
+pushb '1'
+b2i
+modi
+outb
+pushb ' '
+outb
+pushb '0'
+b2i
+pushb '1'
+b2i
+addi
+outb
+pushb '\n'
+outb
+pushi 1
+pushi 2
+lti
+outi
+pushb ' '
+outb
+pushi 4
+pushi 3
+gei
+outi
+pushb ' '
+outb
+pushi 5
+pushi 5
+eqi
+outi
+pushb ' '
+outb
+pushi 1
+pushi 2
+and
+outi
+pushb ' '
+outb
+pushi 0
+pushi 3
+or
+outi
+pushb ' '
+outb
+pushi 0
+not
+outi
+pushb '\n'
+outb
