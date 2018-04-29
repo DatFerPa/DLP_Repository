@@ -11,6 +11,9 @@ main:
 	' var i int ( offset -4 )
 enter 4
 pusha 0
+pushb 97
+storeb
+pusha 0
 loadb
 outb
 pushb 202
@@ -23,7 +26,7 @@ storei
 pusha bp
 pushi -4
 addi
-pushb 87
+pushb 48
 b2i
 pushi 3
 muli
@@ -33,7 +36,7 @@ pushi -2
 addi
 loadi
 outi
-pushb 71
+pushb 32
 outb
 pusha bp
 pushi -4
@@ -58,27 +61,27 @@ i2b
 pushf 4.5
 subf
 outf
-pushb 71
+pushb 32
 outb
-pushb 87
+pushb 48
 b2i
 i2b
 pushf 48.0
 divf
 outf
-pushb 71
+pushb 32
 outb
-pushb 87
+pushb 48
 b2i
-pushb 88
+pushb 49
 b2i
 modi
 outb
-pushb 71
+pushb 32
 outb
-pushb 87
+pushb 48
 b2i
-pushb 88
+pushb 49
 b2i
 addi
 outb
@@ -88,31 +91,31 @@ pushi 1
 pushi 2
 lti
 outi
-pushb 71
+pushb 32
 outb
 pushi 4
 pushi 3
 gei
 outi
-pushb 71
+pushb 32
 outb
 pushi 5
 pushi 5
 eqi
 outi
-pushb 71
+pushb 32
 outb
 pushi 1
 pushi 2
 and
 outi
-pushb 71
+pushb 32
 outb
 pushi 0
 pushi 3
 or
 outi
-pushb 71
+pushb 32
 outb
 pushi 0
 not

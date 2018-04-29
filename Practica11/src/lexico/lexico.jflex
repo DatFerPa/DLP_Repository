@@ -86,7 +86,7 @@ main {this.yylval = yytext(); return Parser.MAIN;}
 					return Parser.IDENT;}
 					
 //Constante caracter
-{ConstanteCaracter} {this.yylval = yytext().charAt(1)+yytext().charAt(2);
+{ConstanteCaracter} {this.yylval = yytext();
 						return Parser.CTE_CARACTER;}					
 
 

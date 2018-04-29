@@ -1103,7 +1103,7 @@ case 65:
 break;
 case 66:
 //#line 168 "../../src/sintactico/sintactico.y"
-{String[] partido = ((String)val_peek(0)).split("\"");yyval = new CTE_Caracter(lexico.getLinea(),lexico.getColumna(),partido[0]);}
+{yyval = new CTE_Caracter(lexico.getLinea(),lexico.getColumna(),val_peek(0));}
 break;
 case 67:
 //#line 169 "../../src/sintactico/sintactico.y"

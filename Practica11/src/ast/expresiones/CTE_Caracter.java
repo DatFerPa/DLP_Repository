@@ -9,20 +9,22 @@ public class CTE_Caracter extends AbstractExpresion {
 	private int valor;
 	private String valorString;
 
-	public CTE_Caracter(int linea, int columna, int valor) {
+	public CTE_Caracter(int linea, int columna, String valorS) {
 		super();
-		this.valor = valor;
+		this.valorString = valorS;
 		setLinea(linea);
 		setColumna(columna);
 		setTipo(TipoCaracter.getInstancia());
+		definirValor();
 	}
 
-	public CTE_Caracter(int linea, int columna, Object valor) {
+	public CTE_Caracter(int linea, int columna, Object valorS) {
 		super();
-		this.valor = Integer.parseInt(String.valueOf(valor));
+		this.valorString = (String) valorS;
 		setLinea(linea);
 		setColumna(columna);
 		setTipo(TipoCaracter.getInstancia());
+		definirValor();
 	}
 
 	@Override
@@ -37,6 +39,14 @@ public class CTE_Caracter extends AbstractExpresion {
 	@Override
 	public Object aceptar(Visitor visitor, Object param) {
 		return visitor.visitar(this, param);
+	}
+	
+	private void definirValor() {
+		if(valorString.length() == 3) {			
+			this.valor = Integer.valueOf(valorString.charAt(1));
+		}else {
+			this.valor = Integer.valueOf(valorString.charAt(1)+valorString.charAt(2));
+		}
 	}
 
 }

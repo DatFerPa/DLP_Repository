@@ -5,7 +5,7 @@ var r float32;
 func main() {
 	var a, i int;
 	
-	//c='a';
+	c='a';
 	write(c,'\n');
 
 	a=1;
