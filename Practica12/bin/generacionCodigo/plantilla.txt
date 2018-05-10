@@ -1,0 +1,341 @@
+ejecutar[[Programa: programa -> definicion*]] =
+	<source> programa.file_name
+	
+	for(Definicion def definicion*)
+		if def instanceof DefVariable
+			ejecutar[[def]]
+				
+	<call> main 
+	<halt>
+	
+	
+	for(Definicion def definicion*)
+		if def instanceof DefFuncion
+			ejecutar[[def]]
+
+
+ejecutar[[Escritura: sentencia -> expresion*]](defFuncion) =
+	
+	for(Expresion exp: expresion*)
+		valor[[exp]]
+		<out>
+
+
+ejecutar[[Lectura: sentencia -> expresion*]](defFuncion) =
+
+	for(Expresion exp: expresion*)
+		direccion[[expresion]]
+		<in>
+		<store>
+
+		
+ejecutar[[Asignacion: sentencia -> expresion_1 expresion_2]](defFuncion) =		
+		
+	direccion[[expresion_1]]
+	valor[[expresion_2]]	
+	<store>	
+
+
+valor[[Cast: expresion -> tipo expresionC]] =
+		
+		valor[[expresionC]]
+		if(expresionC.tipo instanceof TipoReal){
+			if(tipo instanceof TipoEntero){
+				<f2i>
+			}else if(tipo instanceof TipoCaracter){
+				<f2i>
+				<i2b>
+			}
+				
+		}else if(expresionC.tipo instanceof TipoEntero){
+			if(tipo instanceof TipoReal){
+				<i2f>
+			}else if(tipo instanceof TipoCaracter){
+				<i2b>
+			}
+		}else{
+			if(tipo instanceof TipoEntero){
+				<b2i>		
+			}else if(tipo instanceof TipoReal){
+				<b2i>
+				<i2f>
+			}	
+		}	
+
+
+valor[[ExpresionAritmetica: expresion -> expresion_1 operador expresion_2]] =
+	
+	valor[[expresion_1]]
+	if(expresion_1.tipo instanceof TipoCaracter){
+		<b2i>
+	}
+	valor[[expresion_2]]
+	if(expresion_2.tipo instanceof TipoCaracter){
+		<b2i>
+	}
+	if(operador.equals("+")){
+		if(expresion_1.tipo instanceof TipoReal){
+			<addf>
+		}else{
+			<addi>
+		}
+	}else if(operador.equals("*")){
+		if(expresion_1.tipo instanceof TipoReal){
+			<mulf>
+		}else{
+			<muli>
+		}
+	}else if(operador.equals("-")){
+		if(expresion_1.tipo instanceof TipoReal){
+			<subf>
+		}else{
+			<subi>
+		}
+	}else if(operador.equals("/")){
+		if(expresion_1.tipo instanceof TipoReal){
+			<divf>
+		}else{
+			<divi>
+		}
+	}else{
+		if(expresion_1.tipo instanceof TipoReal){
+			<modf>
+		}else{
+			<modi>
+		}		
+	}
+
+
+valor[[Comparacion: expresion -> expresion_1 operando expresion_2]] =
+
+	valor[[expresion_1]]
+	if(expresion_1.tipo instanceof TipoCaracter){
+		<b2i>
+	}
+	valor[[expresion_2]]
+	if(expresion_2.tipo instanceof TipoCaracter){
+		<b2i>
+	}
+	if(operando.equals(">")){
+		if(expresion_1.tipo instanceof TipoReal){
+			<gtf>
+		}else{
+			<gti>
+		}
+	}else if(operando.equals("<")){
+		if(expresion_1.tipo instanceof TipoReal){
+			<ltf>
+		}else{
+			<lti>
+		}
+	}else if(operando.equals(">=")){
+		if(expresion_1.tipo instanceof TipoReal){
+			<gef>
+		}else{
+			<gei>
+		}
+	}else if(operando.equals("<=")){
+		if(expresion_1.tipo instanceof TipoReal){
+			<lef>
+		}else{
+			<lei>
+		}
+	}else if(operando.equals("==")){
+		if(expresion_1.tipo instanceof TipoReal){
+			<eqf>
+		}else{
+			<eqi>
+		}
+	}else{
+		if(expresion_1.tipo instanceof TipoReal){
+			<nef>
+		}else{
+			<nei>
+		}
+	}
+
+
+valor[[MenosUnario expresion -> expresionM]] =
+
+	valor[[expresionM]]
+	if(expresionM.tipo instanceof TipoCaracter){
+		<b2i>
+	}
+	if(expresionM.tipo instanceof TipoReal){
+		<pushf> -1.0
+		<mulf>
+	}else{
+		<pushi> -1
+		<muli>
+	}
+
+valor[[ExpresionLogica expresion -> expresion_1 operador expresion_2]] =
+
+	valor[[expresion_1]]
+	valor[[expresion_2]]
+	if(operador.equal("&&")){
+		<and>
+	}else{
+		<or>
+	}
+	
+
+valor[[Negacion expresion -> expresionN]] =
+	valor[[expresionN]]
+	<not>
+
+
+ejecutar[[DefFuncion definicion -> nombre tipoBase ambito offset defVariable* sentencia*]] =
+	
+	nombre :
+	' * Parameters
+	for(DefVariable def : tipoBase.argumentos){
+		ejecutar[[def]]
+	}
+	int tamEnter = 0;
+	' * Local variables
+	for(DefVariable def : defVAriable*){
+		ejecutar[[def]]
+		tamEnter+= def.offset;
+	}
+	<enter> tamEnter
+	for(Sentencia sent: sentencia*){
+		ejecutar[[sent]](DefFuncion)
+	}
+	
+	
+ejecutar[[DefVariable definicion -> nombre tipoBase ambito offsetVar parametro]] =
+
+
+	' * var nombre ejecutar[[tipoBase]] ( offset  offsetVar)
+	
+	
+ejecutar[[Tipo tipoEntero]]	=
+	
+	int
+	
+ejecutar[[Tipo tipoReal]]	=
+	
+	float32	
+
+ejecutar[[Tipo tipoCaracter]]	=
+	
+	char	
+
+ejecutar[[Tipo tipoStruct -> campo*]]	=
+	
+	struct{
+	
+	for(Campo cmp: campo*){
+		ejecutar[[cmp]]
+	}
+	
+	}
+	
+ejecutar[[Tipo tipoArray -> tam tipo_de]] =
+
+	[tam] ejecutar[[tipo_de]]
+
+
+ejecutar[[Campo -> tipo nombre]] =
+
+	nombre ejecutar[[tipo]]
+
+ejecutar[[SenteciaIf sentencia -> exp_condicion sentencia_if* sentencia_else*]](defFuncion) =
+	
+	ejecutar[[exp_condicion]]
+	jz {cuerpo_else}
+	for(Sentencia sent : sentencia_if*){
+		ejecutar[[sent]]
+	}
+	jmp {fin_if}
+	{cuerpo_else}:
+	for(Sentencia sent : sentencia_else*){
+		ejecutar[[sent]]		
+	}
+	
+	
+	{fin_if}:
+
+ejecutar[[SentenciaWhile sentencia -> expCondicion sentencia_cuerpo*]](defFuncion) =
+
+	{condicion_while}:
+	valor[[expCondicion]]
+	jz {fin_while}	
+	for(Sentencia sent: sentencia_cuerpo*){
+		ejecutar[[sent]]
+	}
+	jmp {condicion_while}
+	{fin_while}:
+	
+valor[[AccesoACampo expresion -> expresion_izq nombre_string]] =	
+	
+	dir[[expresion_izq]]
+	<push> expresion_izq.getTipo().desplazamiento(nombre_string) 
+	<addi>
+	<loadi>
+	
+direccion[[AccesoACampo expresion -> expresion_izq nombre_string]] =
+	
+	dir[[expresion_izq]]
+	<push> expresion_izq.getTipo().desplazamiento(nombre_string) 
+	<addi>
+	
+	
+ejecutar[[SentenciaReturn sentencia -> expresion]](defFuncion) =
+	<valor> expresion
+	<ret>  defFuncion.getTipoRetorno().getBits(),defFuncion.tamVariablesLocales() , defFuncion.getTipo().getTamParametros()
+	
+
+ejecutar[[SentenciaFuncion sentencia -> var_identificador exp_parametro*]](defFuncion) =
+	
+	for(Expresion exp: exp_parametro*){
+		valor[[exp*]]	
+	}
+	<call> var_identificador.nombre	
+	if(var_identificador.getTipo().getTipoRetorno() != tipoVoid){	
+		<pop>		
+	}
+
+valor[[ExpresionFuncion expresion -> var_identificador exp_parametro* ]] =
+
+	for(Expresion exp: exp_parametro*){
+		valor[[exp*]]
+	
+	}
+	<call> var_identificador.nombre		
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+valor[[AccesoArray]]	
+
+
+direccion[[]]	
+
+
+
+
+	
+	
+	
+	
+	
+	
+	
+	
+
+			
