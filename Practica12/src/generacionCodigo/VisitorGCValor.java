@@ -9,6 +9,7 @@ import ast.expresiones.CTE_Real;
 import ast.expresiones.Comparacion;
 import ast.expresiones.ExpresionAritmetica;
 import ast.expresiones.ExpresionCast;
+import ast.expresiones.ExpresionFuncion;
 import ast.expresiones.ExpresionLogica;
 import ast.expresiones.MenosUnario;
 import ast.expresiones.Negacion;
@@ -185,6 +186,15 @@ public class VisitorGCValor extends AbstractVisitorGC {
 	public Object visitar(AccesoArray m,Object param) {
 		m.aceptar(direccion, param);
 		GC.load(((TipoArray)m.getFuera_corchetes().getTipo()).getDe());
+		return null;
+	}
+	
+	@Override
+	public Object visitar(ExpresionFuncion m,Object param) {
+		for(AbstractExpresion exp:m.getArgumentos()) {
+			exp.aceptar(this, param);
+		}
+		GC.call(m.getIdentificador().getNombre());
 		return null;
 	}
 

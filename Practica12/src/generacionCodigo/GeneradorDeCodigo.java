@@ -4,6 +4,7 @@ import java.io.FileWriter;
 import java.io.IOException;
 
 import ast.tipos.Tipo;
+import ast.tipos.TipoCaracter;
 import ast.tipos.TipoEntero;
 import ast.tipos.TipoReal;
 
@@ -527,7 +528,36 @@ public class GeneradorDeCodigo {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void pop(Tipo tipo) {
+		try {
+			fw.write("\t");
+			if (tipo instanceof TipoEntero) {
+				fw.write("popi");
+			} else if (tipo instanceof TipoReal) {
+				fw.write("popf");
+			} else if (tipo instanceof TipoCaracter){
+				fw.write("popb");
+			}else {
+				fw.write("#Void, no se hace pop");
+			}
+			saltoLinea();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	public void ret(int tamRet,int tamVarLocales,int tamParams) {
+		try {
+			fw.write("\t");
+			fw.write("ret "+tamRet+", "+tamVarLocales+", "+tamParams);
+			saltoLinea();
+		}catch(IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public void bp() {
 		pusha("bp");
 	}

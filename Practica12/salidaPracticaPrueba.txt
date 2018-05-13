@@ -1,282 +1,210 @@
-#source "entradaPractica11.txt"
-	' var v[10] float32 ( offset 0 )
+#source "entradaPractica12.txt"
+	' var i int ( offset 0 )
+	' var n int ( offset 2 )
+	' var j int ( offset 4 )
+	' var c char ( offset 6 )
+	' var pair struct{integer int,  character char,  } ( offset 7 )
+	' var matrix[10][10] int ( offset 10 )
 call main
 halt
- main:
+ p:
 	' * Parameters
 	' * Local variables
-	' var value float32 ( offset -4 )
-	' var i int ( offset -6 )
-	' var j int ( offset -8 )
-	' var w[4][5] int ( offset -48 )
-	' var date struct{day int,  month int,  year int,  } ( offset -54 )
-	enter 54
-#line 13
-	' * Read
+	enter 0
+	ret 0, 0, 0
+ f:
+	' * Parameters
+	' var r float32 ( offset 6 )
+	' var e int ( offset 4 )
+	' * Local variables
+	' var real float32 ( offset -4 )
+	' var c char ( offset -5 )
+	enter 5
+#line 17
 	pusha bp
-	pushi -54
+	pushi -4
 	addi
-	pushi 0
+	pusha 7
+	pushi 2
 	addi
-	ini
-	storei
-#line 14
-	pusha bp
-	pushi -54
-	addi
-	pushi 4
-	addi
-	pushb 97
+	loadb
 	b2i
-	storei
-#line 15
-	pusha bp
-	pushi -54
-	addi
-	pushi 2
-	addi
-	pusha bp
-	pushi -54
-	addi
+	i2f
+	pusha 7
 	pushi 0
 	addi
 	loadi
+	i2f
+	addf
 	pusha bp
-	pushi -54
+	pushi 6
 	addi
-	pushi 4
-	addi
-	loadi
-	muli
-	pushi 12
-	modi
-	pushi 1
-	addi
-	storei
-#line 16
-	' * Write
+	loadf
+	addf
 	pusha bp
-	pushi -54
-	addi
-	pushi 0
-	addi
-	loadi
-	outi
-	' * Write
-	pushb 202
-	outb
-	' * Write
-	pusha bp
-	pushi -54
-	addi
-	pushi 2
-	addi
-	loadi
-	outi
-	' * Write
-	pushb 202
-	outb
-	' * Write
-	pusha bp
-	pushi -54
-	addi
 	pushi 4
 	addi
 	loadi
 	i2f
-	outf
-	' * Write
-	pushb 202
-	outb
-#line 18
-	' * Read
-	pusha bp
-	pushi -4
-	addi
-	inf
+	addf
 	storef
-#line 20
+#line 18
 	pusha bp
-	pushi -6
+	pushi -5
+	addi
+	pushb 48
+	storeb
+#line 19
+	pusha bp
+	pushi -5
+	addi
+	loadb
+	b2i
+	ret 2, 5, 6
+ fill:
+	' * Parameters
+	' var row int ( offset 8 )
+	' var value int ( offset 6 )
+	' var increment int ( offset 4 )
+	' * Local variables
+	' var i int ( offset -2 )
+	' var inc int ( offset -4 )
+	enter 4
+#line 26
+	pusha bp
+	pushi -2
 	addi
 	pushi 0
 	storei
-#line 31
+#line 27
+	pusha bp
+	pushi -4
+	addi
+	pusha bp
+	pushi 4
+	addi
+	loadi
+	storei
+#line 32
  flag-0:
 	pusha bp
-	pushi -6
+	pushi -2
 	addi
 	loadi
 	pushi 10
 	lti
 	jz flag-1
-#line 22
-	pusha 0
-	pusha bp
-	pushi -6
-	addi
-	loadi
-	pushi 4
-	muli
-	addi
-	pusha bp
-	pushi -4
-	addi
-	loadf
-	storef
-#line 23
-	' * Write
-	pusha bp
-	pushi -6
-	addi
-	loadi
-	outi
-	' * Write
-	pushb 58
-	outb
-	' * Write
-	pusha 0
-	pusha bp
-	pushi -6
-	addi
-	loadi
-	pushi 4
-	muli
-	addi
-	loadf
-	outf
-	' * Write
-	pushb 32
-	outb
 #line 29
+	pusha 10
 	pusha bp
-	pushi -6
+	pushi 8
+	addi
+	loadi
+	pushi 20
+	muli
+	addi
+	pusha bp
+	pushi -2
 	addi
 	loadi
 	pushi 2
-	modi
-	jz flag-2
-#line 25
-	' * Write
-	pushb 111
-	outb
-	' * Write
-	pushb 100
-	outb
-	' * Write
-	pushb 100
-	outb
-	' * Write
-	pushb 202
-	outb
-	jmp flag-3
- flag-2:
-#line 28
-	' * Write
-	pushb 101
-	outb
-	' * Write
-	pushb 118
-	outb
-	' * Write
-	pushb 101
-	outb
-	' * Write
-	pushb 110
-	outb
-	' * Write
-	pushb 202
-	outb
- flag-3:
-#line 30
-	pusha bp
-	pushi -6
+	muli
 	addi
 	pusha bp
-	pushi -6
+	pushi 6
+	addi
+	loadi
+	pusha bp
+	pushi -4
+	addi
+	loadi
+	addi
+	storei
+#line 30
+	pusha bp
+	pushi -2
+	addi
+	pusha bp
+	pushi -2
 	addi
 	loadi
 	pushi 1
 	addi
 	storei
-	jmp flag-0
- flag-1:
-#line 32
-	' * Write
-	pushb 202
-	outb
-#line 34
+#line 31
 	pusha bp
-	pushi -6
+	pushi -4
 	addi
-	pushi 0
-	storei
-#line 44
- flag-4:
 	pusha bp
-	pushi -6
+	pushi -4
 	addi
 	loadi
-	pushi 4
-	lti
-	jz flag-5
-#line 36
 	pusha bp
-	pushi -8
+	pushi 4
+	addi
+	loadi
+	addi
+	storei
+	jmp flag-0
+ flag-1:
+	ret 0, 4, 6
+ show:
+	' * Parameters
+	' var row int ( offset 4 )
+	' * Local variables
+	' var i int ( offset -2 )
+	enter 2
+#line 37
+	pusha bp
+	pushi -2
 	addi
 	pushi 0
 	storei
 #line 41
- flag-6:
+ flag-2:
 	pusha bp
-	pushi -8
-	addi
-	loadi
-	pushi 5
-	lti
-	jz flag-7
-#line 38
-	pusha bp
-	pushi -48
-	addi
-	pusha bp
-	pushi -6
+	pushi -2
 	addi
 	loadi
 	pushi 10
-	muli
-	addi
-	pusha bp
-	pushi -8
-	addi
-	loadi
-	pushi 2
-	muli
-	addi
-	pusha bp
-	pushi -6
-	addi
-	loadi
-	pusha bp
-	pushi -8
-	addi
-	loadi
-	addi
-	storei
+	lti
+	jz flag-3
 #line 39
 	' * Write
+	pushb 40
+	outb
+	' * Write
 	pusha bp
-	pushi -48
-	addi
-	pusha bp
-	pushi -6
+	pushi 4
 	addi
 	loadi
-	pushi 10
+	outi
+	' * Write
+	pushb 44
+	outb
+	' * Write
+	pusha bp
+	pushi -2
+	addi
+	loadi
+	outi
+	' * Write
+	pushb 41
+	outb
+	' * Write
+	pushb 58
+	outb
+	' * Write
+	pusha 10
+	pusha bp
+	pushi 4
+	addi
+	loadi
+	pushi 20
 	muli
 	addi
 	pusha bp
-	pushi -8
+	pushi -2
 	addi
 	loadi
 	pushi 2
@@ -289,31 +217,127 @@ halt
 	outb
 #line 40
 	pusha bp
-	pushi -8
+	pushi -2
 	addi
 	pusha bp
-	pushi -8
+	pushi -2
 	addi
 	loadi
 	pushi 1
 	addi
 	storei
-	jmp flag-6
- flag-7:
+	jmp flag-2
+ flag-3:
 #line 42
 	' * Write
 	pushb 202
 	outb
-#line 43
+	ret 0, 2, 2
+ main:
+	' * Parameters
+	' * Local variables
+	' var i int ( offset -2 )
+	enter 2
+#line 50
+	call p
+	#Void, no se hace pop
+#line 51
 	pusha bp
-	pushi -6
+	pushi -2
+	addi
+	pushi 0
+	storei
+#line 52
+	pusha 7
+	pushi 2
+	addi
+	pushb 48
+	storeb
+#line 53
+	pusha 7
+	pushi 0
+	addi
+	pushb 48
+	b2i
+	storei
+#line 54
+	' * Write
+	pusha bp
+	pushi -2
+	addi
+	loadi
+	i2f
+	pusha 7
+	pushi 2
+	addi
+	loadb
+	b2i
+	call f
+	outi
+	' * Write
+	pushb 202
+	outb
+#line 56
+	pushf 1.3
+	pushi 2
+	call f
+	popi
+#line 58
+	pusha bp
+	pushi -2
+	addi
+	pushi 0
+	storei
+#line 59
+	pusha 4
+	pushi 0
+	storei
+#line 66
+ flag-4:
+	pusha bp
+	pushi -2
+	addi
+	loadi
+	pushi 10
+	lti
+	jz flag-5
+#line 61
+	pusha bp
+	pushi -2
+	addi
+	loadi
+	pusha 4
+	loadi
+	pushi 1
+	call fill
+	#Void, no se hace pop
+#line 63
+	pusha bp
+	pushi -2
+	addi
+	loadi
+	call show
+	#Void, no se hace pop
+#line 64
+	pusha bp
+	pushi -2
 	addi
 	pusha bp
-	pushi -6
+	pushi -2
 	addi
 	loadi
 	pushi 1
 	addi
 	storei
+#line 65
+	pusha 4
+	pusha bp
+	pushi -2
+	addi
+	loadi
+	pushi 10
+	muli
+	storei
 	jmp flag-4
  flag-5:
+	ret 0, 2, 0

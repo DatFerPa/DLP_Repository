@@ -7,18 +7,24 @@ import ast.Sentencia;
 import ast.definiciones.DefFuncion;
 import ast.definiciones.DefVariable;
 import ast.definiciones.Definicion;
+import ast.definiciones.DefinicionAbstracta;
+import ast.expresiones.ExpresionFuncion;
 import ast.sentencias.Asignacion;
 import ast.sentencias.Escritura;
 import ast.sentencias.Lectura;
+import ast.sentencias.SentenciaFuncion;
 import ast.sentencias.SentenciaIf;
+import ast.sentencias.SentenciaReturn;
 import ast.sentencias.SentenciaWhile;
 import ast.tipos.Campo;
+import ast.tipos.Tipo;
 import ast.tipos.TipoArray;
 import ast.tipos.TipoCaracter;
 import ast.tipos.TipoEntero;
 import ast.tipos.TipoFuncion;
 import ast.tipos.TipoReal;
 import ast.tipos.TipoStruct;
+import ast.tipos.TipoVoid;
 
 //aqui ejecutar
 public class VisitorGCEjecutor extends AbstractVisitorGC {
@@ -55,7 +61,7 @@ public class VisitorGCEjecutor extends AbstractVisitorGC {
 		GC.print("halt\n");
 
 		for (Definicion def : m.getDefiniciones()) {
-			if (def instanceof DefFuncion) {				
+			if (def instanceof DefFuncion) {
 				def.aceptar(this, param);
 			}
 		}
@@ -95,8 +101,6 @@ public class VisitorGCEjecutor extends AbstractVisitorGC {
 		return null;
 	}
 
-
-
 	@Override
 	public Object visitar(DefFuncion m, Object param) {
 		GC.tag(m.getNombre());
@@ -112,8 +116,22 @@ public class VisitorGCEjecutor extends AbstractVisitorGC {
 		}
 		GC.enter(tamEnter);
 		for (Sentencia sent : m.getLista_sentencias()) {
-			GC.print("#line "+((NodoASTAbstract)sent).getLinea()+"\n");
-			sent.aceptar(this, param);
+			GC.print("#line " + ((NodoASTAbstract) sent).getLinea() + "\n");
+			sent.aceptar(this, m);
+		}
+
+		if (((TipoFuncion) m.getTipoBase()).getTipoRetorno() instanceof TipoVoid) {
+
+			int tamVariablesLocales = 0;
+			for (DefVariable def : ((DefFuncion) m).getVariablesLocales()) {
+				tamVariablesLocales += def.getTipoBase().getBits();
+			}
+			int tamParametros = 0;
+			for (DefVariable def : ((TipoFuncion) ((DefFuncion) m).getTipoBase()).getArgumentos()) {
+				tamParametros += def.getTipoBase().getBits();
+			}
+
+			GC.ret(0, tamVariablesLocales, tamParametros);
 		}
 		return null;
 	}
@@ -173,7 +191,7 @@ public class VisitorGCEjecutor extends AbstractVisitorGC {
 		m.getTipo().aceptar(this, param);
 		return null;
 	}
-	
+
 	@Override
 	public Object visitar(SentenciaWhile m, Object param) {
 		String condicionWhile = GC.getFlag() + GC.getIndiceFlag();
@@ -183,37 +201,81 @@ public class VisitorGCEjecutor extends AbstractVisitorGC {
 		GC.tag(condicionWhile);
 		m.getCondicion().aceptar(valor, param);
 		GC.jz(fin_while);
-		for(Sentencia sent : m.getCuerpo()) {
-			GC.print("#line "+((NodoASTAbstract)sent).getLinea()+"\n");
+		for (Sentencia sent : m.getCuerpo()) {
+			GC.print("#line " + ((NodoASTAbstract) sent).getLinea() + "\n");
 			sent.aceptar(this, param);
 		}
 		GC.jmp(condicionWhile);
 		GC.tag(fin_while);
-		
-		
-		return null;		
+
+		return null;
 	}
-	
+
 	@Override
-	public Object visitar(SentenciaIf m,Object param) {
+	public Object visitar(SentenciaIf m, Object param) {
 		String cuerpo_else = GC.getFlag() + GC.getIndiceFlag();
 		GC.aumentarFlag();
 		String fin_if = GC.getFlag() + GC.getIndiceFlag();
 		GC.aumentarFlag();
 		m.getCondicion().aceptar(valor, param);
 		GC.jz(cuerpo_else);
-		for(Sentencia sent: m.getCuerpo_if()) {
-			GC.print("#line "+((NodoASTAbstract)sent).getLinea()+"\n");
+		for (Sentencia sent : m.getCuerpo_if()) {
+			GC.print("#line " + ((NodoASTAbstract) sent).getLinea() + "\n");
 			sent.aceptar(this, param);
 		}
 		GC.jmp(fin_if);
 		GC.tag(cuerpo_else);
-		for(Sentencia sent:m.getCuerpo_else()) {
-			GC.print("#line "+((NodoASTAbstract)sent).getLinea()+"\n");
+		for (Sentencia sent : m.getCuerpo_else()) {
+			GC.print("#line " + ((NodoASTAbstract) sent).getLinea() + "\n");
 			sent.aceptar(this, param);
 		}
 		GC.tag(fin_if);
-		
+		return null;
+	}
+
+	@Override
+	public Object visitar(SentenciaFuncion m, Object param) {
+		for (AbstractExpresion exp : m.getargumentos()) {
+			exp.aceptar(valor, param);
+		}
+		GC.call(m.getIdentificador().getNombre());
+		Tipo tipoRet = ((TipoFuncion) m.getIdentificador().getTipo()).getTipoRetorno();
+		GC.pop(tipoRet);
+
+		return null;
+	}
+
+	@Override
+	public Object visitar(ExpresionFuncion m, Object param) {
+
+		return null;
+	}
+
+	@Override
+	public Object visitar(SentenciaReturn m, Object param) {
+		m.getExp().aceptar(valor, param);
+		Tipo tipoRet = ((TipoFuncion) ((DefFuncion) param).getTipoBase()).getTipoRetorno();
+		int tamRet;
+		if (tipoRet instanceof TipoEntero) {
+			tamRet = 2;
+		} else if (tipoRet instanceof TipoCaracter) {
+			tamRet = 1;
+		} else if (tipoRet instanceof TipoReal) {
+			tamRet = 4;
+		} else if (tipoRet instanceof TipoVoid) {
+			tamRet = 0;
+		} else {
+			throw new RuntimeException("El parametro que se ha pasado no es un tipo que se pueda retornar");
+		}
+		int tamVariablesLocales = 0;
+		for (DefVariable def : ((DefFuncion) param).getVariablesLocales()) {
+			tamVariablesLocales += def.getTipoBase().getBits();
+		}
+		int tamParametros = 0;
+		for (DefVariable def : ((TipoFuncion) ((DefFuncion) param).getTipoBase()).getArgumentos()) {
+			tamParametros += def.getTipoBase().getBits();
+		}
+		GC.ret(tamRet, tamVariablesLocales, tamParametros);
 		return null;
 	}
 

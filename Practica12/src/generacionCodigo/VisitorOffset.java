@@ -4,6 +4,7 @@ import ast.Programa;
 import ast.definiciones.DefFuncion;
 import ast.definiciones.DefVariable;
 import ast.definiciones.Definicion;
+import ast.definiciones.DefinicionAbstracta;
 import ast.tipos.TipoFuncion;
 import visitor.VisitorAbstracto;
 
@@ -42,7 +43,15 @@ public class VisitorOffset extends VisitorAbstracto{
 	public Object visitar(TipoFuncion m,Object param) {
 		//vamos a tener en cuenta el +4 que se le añadae al bp
 		int offset = 4;
-		for(DefVariable def: m.getArgumentos()){
+		
+		/*
+		 * 
+		 * def.setParametro(true);
+			def.setOffset(offset);
+			offset += def.getTipoBase().getBits();
+		 */
+		for(int i = m.getArgumentos().size()-1; i>= 0; i-- ){
+			DefVariable def = m.getArgumentos().get(i);
 			def.setParametro(true);
 			def.setOffset(offset);
 			offset += def.getTipoBase().getBits();
