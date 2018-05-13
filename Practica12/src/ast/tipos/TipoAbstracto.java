@@ -86,6 +86,11 @@ public abstract class TipoAbstracto extends NodoASTAbstract implements Tipo {
 	public int desplazamiento(String nombre) {
 		throw new RuntimeException("El desplazamiento no se puede encontrar fuera de un tipo Struct");
 	}
+	
+	@Override
+	public Tipo tipoAccesoCampo(String nombre) {
+		throw new RuntimeException("No se puede realizar el acceso a un campo si no se es un tipo Struct");
+	}
 
 	
 }

@@ -1,7 +1,8 @@
 package generacionCodigo;
 
 import ast.AbstractExpresion;
-import ast.definiciones.DefinicionAbstracta;
+import ast.expresiones.AccesoACampo;
+import ast.expresiones.AccesoArray;
 import ast.expresiones.CTE_Caracter;
 import ast.expresiones.CTE_Entera;
 import ast.expresiones.CTE_Real;
@@ -12,11 +13,12 @@ import ast.expresiones.ExpresionLogica;
 import ast.expresiones.MenosUnario;
 import ast.expresiones.Negacion;
 import ast.expresiones.Variable;
+import ast.tipos.TipoArray;
 import ast.tipos.TipoCaracter;
 import ast.tipos.TipoEntero;
 import ast.tipos.TipoReal;
 
-public class VisitorGCValor extends VisitorOffset {
+public class VisitorGCValor extends AbstractVisitorGC {
 
 	private VisitorGCEjecutor ejecutar;
 	private VisitorGCDireccion direccion;
@@ -168,6 +170,21 @@ public class VisitorGCValor extends VisitorOffset {
 	public Object visitar(Variable m, Object param) {
 		m.aceptar(direccion, param);
 		GC.load(m.getTipo());
+		return null;
+	}
+	
+	@Override
+	public Object visitar(AccesoACampo m, Object param) {
+		m.aceptar(direccion,param);
+		GC.load(m.getIzq().getTipo().tipoAccesoCampo(m.getNombre()));		
+		return null;
+	}
+	
+	
+	@Override
+	public Object visitar(AccesoArray m,Object param) {
+		m.aceptar(direccion, param);
+		GC.load(((TipoArray)m.getFuera_corchetes().getTipo()).getDe());
 		return null;
 	}
 

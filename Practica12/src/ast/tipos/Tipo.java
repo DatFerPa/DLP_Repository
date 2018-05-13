@@ -39,4 +39,6 @@ public interface Tipo extends NodoAST {
 	
 	//solo para buscar el desplazamiento de un campo
 	public int desplazamiento(String nombre);
+	
+	public Tipo tipoAccesoCampo(String nombre);
 }

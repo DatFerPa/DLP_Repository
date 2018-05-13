@@ -18,7 +18,7 @@ public class VisitorOffset extends VisitorAbstracto{
 		for(Definicion def :m.getDefiniciones()) {
 			if(def instanceof DefVariable) {
 				((DefVariable) def).setOffset(offset);
-				offset += ((DefVariable) def).getOffset();
+				offset += ((DefVariable) def).getTipoBase().getBits();
 			}
 		}
 		super.visitar(m, param);
@@ -30,7 +30,7 @@ public class VisitorOffset extends VisitorAbstracto{
 		int offset = 0;
 		for(DefVariable def: m.getVariablesLocales()) {
 			def.setOffset(offset);
-			offset += def.getOffset();
+			offset = def.getOffset();
 		}
 		
 		
@@ -45,7 +45,7 @@ public class VisitorOffset extends VisitorAbstracto{
 		for(DefVariable def: m.getArgumentos()){
 			def.setParametro(true);
 			def.setOffset(offset);
-			offset = def.getOffset();
+			offset += def.getTipoBase().getBits();
 		}
 		return null;
 	}

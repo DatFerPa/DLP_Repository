@@ -1,7 +1,6 @@
 package ast.expresiones;
 
 import ast.AbstractExpresion;
-import ast.Expresion;
 import visitor.Visitor;
 
 public class AccesoArray extends AbstractExpresion {

@@ -74,5 +74,13 @@ public class TipoStruct extends TipoAbstracto {
 		throw new RuntimeException("El campo que se está buscando no exite");
 	}
 	
+	public Tipo tipoAccesoCampo(String nombre) {
+		for(Campo c:campos) {
+			if(nombre.equals(c.getNombre())) {
+				return c.getTipo();
+			}
+		}
+		throw new RuntimeException("El campo que se está buscando no exite");
+	}
 	
 }

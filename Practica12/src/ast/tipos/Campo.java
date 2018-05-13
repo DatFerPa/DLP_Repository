@@ -42,7 +42,7 @@ public class Campo extends NodoASTAbstract {
 	}
 
 	public void setdesplazamiento(int desplazamiento) {
-		this.desplazamiento = desplazamiento + getTipo().getBits();
+		this.desplazamiento = desplazamiento;
 	}
 
 	@Override

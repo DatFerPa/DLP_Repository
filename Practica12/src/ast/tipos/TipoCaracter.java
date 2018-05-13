@@ -21,7 +21,7 @@ public class TipoCaracter extends TipoAbstracto {
 	@Override
 	public Tipo aritmetica(Tipo expresion) {
 		if (expresion instanceof TipoCaracter) {
-			return this;
+			return TipoEntero.getInstancia();
 		}
 		return null;
 	}

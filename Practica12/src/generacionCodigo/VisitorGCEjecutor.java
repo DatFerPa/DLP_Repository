@@ -1,21 +1,16 @@
 package generacionCodigo;
 
 import ast.AbstractExpresion;
+import ast.NodoASTAbstract;
 import ast.Programa;
 import ast.Sentencia;
 import ast.definiciones.DefFuncion;
 import ast.definiciones.DefVariable;
 import ast.definiciones.Definicion;
-import ast.expresiones.Comparacion;
-import ast.expresiones.ExpresionAritmetica;
-import ast.expresiones.ExpresionCast;
-import ast.expresiones.ExpresionLogica;
-import ast.expresiones.MenosUnario;
-import ast.expresiones.Negacion;
-import ast.expresiones.Variable;
 import ast.sentencias.Asignacion;
 import ast.sentencias.Escritura;
 import ast.sentencias.Lectura;
+import ast.sentencias.SentenciaIf;
 import ast.sentencias.SentenciaWhile;
 import ast.tipos.Campo;
 import ast.tipos.TipoArray;
@@ -26,7 +21,7 @@ import ast.tipos.TipoReal;
 import ast.tipos.TipoStruct;
 
 //aqui ejecutar
-public class VisitorGCEjecutor extends VisitorOffset {
+public class VisitorGCEjecutor extends AbstractVisitorGC {
 
 	private VisitorGCDireccion direccion;
 	private VisitorGCValor valor;
@@ -56,11 +51,11 @@ public class VisitorGCEjecutor extends VisitorOffset {
 			}
 		}
 
-		GC.call("main");
-		GC.halt();
+		GC.print("call main\n");
+		GC.print("halt\n");
 
 		for (Definicion def : m.getDefiniciones()) {
-			if (def instanceof DefFuncion) {
+			if (def instanceof DefFuncion) {				
 				def.aceptar(this, param);
 			}
 		}
@@ -73,6 +68,7 @@ public class VisitorGCEjecutor extends VisitorOffset {
 	@Override
 	public Object visitar(Escritura m, Object param) {
 		for (AbstractExpresion exp : m.getExpresion()) {
+			GC.print("\t' * Write\n");
 			exp.aceptar(valor, param);
 			GC.out(exp.getTipo());
 		}
@@ -83,8 +79,9 @@ public class VisitorGCEjecutor extends VisitorOffset {
 	@Override
 	public Object visitar(Lectura m, Object param) {
 		for (AbstractExpresion exp : m.getExpresion()) {
+			GC.print("\t' * Read\n");
 			exp.aceptar(direccion, param);
-			GC.in();
+			GC.in(exp.getTipo());
 			GC.store(exp.getTipo());
 		}
 		return null;
@@ -115,6 +112,7 @@ public class VisitorGCEjecutor extends VisitorOffset {
 		}
 		GC.enter(tamEnter);
 		for (Sentencia sent : m.getLista_sentencias()) {
+			GC.print("#line "+((NodoASTAbstract)sent).getLinea()+"\n");
 			sent.aceptar(this, param);
 		}
 		return null;
@@ -163,8 +161,9 @@ public class VisitorGCEjecutor extends VisitorOffset {
 		GC.print(" struct{");
 		for (Campo camp : m.getCampos()) {
 			camp.aceptar(this, param);
+			GC.print(",  ");
 		}
-		GC.print("}\n");
+		GC.print("}");
 		return null;
 	}
 
@@ -185,6 +184,7 @@ public class VisitorGCEjecutor extends VisitorOffset {
 		m.getCondicion().aceptar(valor, param);
 		GC.jz(fin_while);
 		for(Sentencia sent : m.getCuerpo()) {
+			GC.print("#line "+((NodoASTAbstract)sent).getLinea()+"\n");
 			sent.aceptar(this, param);
 		}
 		GC.jmp(condicionWhile);
@@ -192,6 +192,29 @@ public class VisitorGCEjecutor extends VisitorOffset {
 		
 		
 		return null;		
+	}
+	
+	@Override
+	public Object visitar(SentenciaIf m,Object param) {
+		String cuerpo_else = GC.getFlag() + GC.getIndiceFlag();
+		GC.aumentarFlag();
+		String fin_if = GC.getFlag() + GC.getIndiceFlag();
+		GC.aumentarFlag();
+		m.getCondicion().aceptar(valor, param);
+		GC.jz(cuerpo_else);
+		for(Sentencia sent: m.getCuerpo_if()) {
+			GC.print("#line "+((NodoASTAbstract)sent).getLinea()+"\n");
+			sent.aceptar(this, param);
+		}
+		GC.jmp(fin_if);
+		GC.tag(cuerpo_else);
+		for(Sentencia sent:m.getCuerpo_else()) {
+			GC.print("#line "+((NodoASTAbstract)sent).getLinea()+"\n");
+			sent.aceptar(this, param);
+		}
+		GC.tag(fin_if);
+		
+		return null;
 	}
 
 }

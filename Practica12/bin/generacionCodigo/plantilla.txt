@@ -243,7 +243,7 @@ ejecutar[[Campo -> tipo nombre]] =
 
 ejecutar[[SenteciaIf sentencia -> exp_condicion sentencia_if* sentencia_else*]](defFuncion) =
 	
-	ejecutar[[exp_condicion]]
+	valor[[exp_condicion]]
 	jz {cuerpo_else}
 	for(Sentencia sent : sentencia_if*){
 		ejecutar[[sent]]
@@ -279,7 +279,29 @@ direccion[[AccesoACampo expresion -> expresion_izq nombre_string]] =
 	
 	dir[[expresion_izq]]
 	<push> expresion_izq.getTipo().desplazamiento(nombre_string) 
+	<addi> 
+
+
+direccion[[AccesoArray expresion -> expr_fueraCorchetes expr_dentroCorchetes]] =	
+	
+	dir[[expr_fueraCorchetes]]
+	valor[[expr_dentroCorchetes]]
+	<pushi> expresion_izq.getTipo().getBits();
+	<muli>
 	<addi>
+	
+	
+valor[[AccesoArray expresion -> expr_fueraCorchetes expr_dentroCorchetes]] =		
+
+	dir[[expr_fueraCorchetes]]
+	valor[[expr_dentroCorchetes]]
+	<pushi> expr_fueraCorchetes.getTipo().getBits();
+	<muli>
+	<addi>
+	<load>
+	
+	
+	
 	
 	
 ejecutar[[SentenciaReturn sentencia -> expresion]](defFuncion) =
