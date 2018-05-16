@@ -12,7 +12,7 @@ public class GeneradorDeCodigo {
 
 	private FileWriter fw;
 	// una instruccion
-	private String flag ="flag-";
+	private String flag ="flag_";
 	private int indiceFlag;
 
 	public GeneradorDeCodigo() {
@@ -538,8 +538,6 @@ public class GeneradorDeCodigo {
 				fw.write("popf");
 			} else if (tipo instanceof TipoCaracter){
 				fw.write("popb");
-			}else {
-				fw.write("#Void, no se hace pop");
 			}
 			saltoLinea();
 		} catch (IOException e) {
